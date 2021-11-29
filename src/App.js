@@ -9,6 +9,7 @@ function App() {
   const [mainQuestList,setMainQuestList] = useState([])
   const [sideQuestTask,setSideQuestTask] = useState('');
   const [sideQuestList,setSideQuestList] = useState([])
+
   // Input Functions
   const handleSubmit = (e) =>{  
     e.preventDefault()
@@ -28,10 +29,17 @@ function App() {
     if (!sideQuestTask){
 
     } else{
-      const newItem = {id: new Date().getTime().toString(),title: sideQuestTask}
+      const newItem = {id: new Date().getTime().toString(),title: sideQuestTask,completed:false}
       setSideQuestList([...sideQuestList,newItem])
       setSideQuestTask('')
     }
+  }
+
+  const taskCompleted = (id) => {
+     const item = mainQuestList.find((item)  => item.id === id)
+    item.completed = (!item.completed)
+    // setMainQuestList(...mainQuestList,item)
+    // console.log(mainQuestList)
   }
   return (
    <main>
@@ -39,9 +47,13 @@ function App() {
       <MainQuestForm
       mainQuestTask={mainQuestTask} setMainQuestTask={setMainQuestTask}
       mainQuestList={mainQuestList} setMainQuestList={setMainQuestList}
+
       handleSubmit={handleSubmit}
       />
-      <MainQuestList mainQuestList={mainQuestList} />
+      <MainQuestList 
+      mainQuestList={mainQuestList}
+      taskCompleted={taskCompleted} 
+     />
       <SideQuestForm
         sideQuestTask={sideQuestTask} setSideQuestTask={setSideQuestTask}
         sideQuestList={sideQuestList} setSideQuestList={setSideQuestList}

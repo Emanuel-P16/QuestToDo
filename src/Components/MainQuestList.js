@@ -1,11 +1,15 @@
 
-const MainQuestList = ({mainQuestList}) => {
+
+const MainQuestList = ({mainQuestList,taskCompleted}) => {
+    
     return (
         <div>
             {mainQuestList.map((mainTask)=>{
                 return(
-                    <article>
-                        {mainTask.title}
+                    <article key={mainTask.id}>
+                    <p className={mainTask.completed ? 'completed' : null}>{mainTask.title}</p>
+                        <button type='submit'>Edit</button>
+                        <button type='submit' onClick={taskCompleted(mainTask.id)}>Completed</button>
                     </article>
                 )
             })}
