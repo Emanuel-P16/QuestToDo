@@ -1,6 +1,6 @@
 
 
-const MainQuestList = ({mainQuestList,taskCompleted}) => {
+const MainQuestList = ({mainQuestList,mainTaskCompleted,mainTaskEdited}) => {
     
     return (
         <div>
@@ -8,8 +8,8 @@ const MainQuestList = ({mainQuestList,taskCompleted}) => {
                 return(
                     <article key={mainTask.id}>
                     <p className={mainTask.completed ? 'completed' : null}>{mainTask.title}</p>
-                        <button type='submit'>Edit</button>
-                        <button type='submit' onClick={taskCompleted(mainTask.id)}>Completed</button>
+                        <button type='submit' onClick={() => mainTaskEdited(mainTask.id)}>Edit</button>
+                        <button type='submit' onClick={() => mainTaskCompleted(mainTask.id)}>Completed</button>
                     </article>
                 )
             })}
