@@ -3,6 +3,8 @@ import MainQuestForm from "./Components/MainQuestForm";
 import MainQuestList from "./Components/MainQuestList"
 import SideQuestForm from './Components/SideQuestForm'
 import SideQuestList from "./Components/SideQuestList";
+import DailyQuest from './Components/DailyQuestComponents/DailyQuest'
+import DailyData from './dailyQuestsData'
 
 const getLocalStorageMain = () =>{
   let mainQuestList = localStorage.getItem('mainList')
@@ -34,6 +36,14 @@ function App() {
   const [sideQuestList,setSideQuestList] = useState(getLocalStorageSide())
   const [isEditingSide,setIsEditingSide] = useState(false)
   const [editIdSide,setEditIdSide] = useState(null)
+
+  // DailyQuess Hooks
+
+  const [dailyQuestTask,setDailyQuestTask] = useState('')
+  const [dailyQuestList,setDailyQuestList] = useState(DailyData)
+  
+  console.log(DailyData)
+
   // Input Functions
   const handleSubmit = (e) =>{  
     e.preventDefault()
@@ -111,6 +121,11 @@ function App() {
     localStorage.setItem('sideList',JSON.stringify(sideQuestList))
   }, [sideQuestList])
 
+  const dailyTaskCompleted = (id) => {
+    const item = dailyQuestList.find((item)  => item.id === id)
+    item.completed = (!item.completed)
+    setDailyQuestList([...dailyQuestList])
+  }
   return (
    <main>
      <section>
@@ -134,6 +149,11 @@ function App() {
         sideTaskEdited={sideTaskEdited} 
       />
      </section>
+       <DailyQuest 
+       dailyQuestTask={dailyQuestTask} setDailyQuestTask={setDailyQuestTask}
+       dailyQuestList={dailyQuestList} setDailyQuestList={setDailyQuestList}
+       dailyTaskCompleted={dailyTaskCompleted}
+       />
    </main>
   );
 }
