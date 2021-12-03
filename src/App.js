@@ -42,8 +42,12 @@ function App() {
   const [dailyQuestTask,setDailyQuestTask] = useState('')
   const [dailyQuestList,setDailyQuestList] = useState(DailyData)
   
-  console.log(DailyData)
-
+  // generalQuest hooks
+  const [questTask,setQuestTask] = useState('');
+  const [questList,setQuestList] = useState([])
+  const [isEditing,setIsEditing] = useState(false)
+  const [editId,setEditId] = useState(null)
+ 
   // Input Functions
   const handleSubmit = (e) =>{  
     e.preventDefault()
@@ -126,25 +130,69 @@ function App() {
     item.completed = (!item.completed)
     setDailyQuestList([...dailyQuestList])
   }
+ // factorizacion de las listas para que sea solo una funcion para todas las listas
+  const handleSubmitGeneral = (e) =>{ 
+    console.log(e) 
+    console.log(e.target.id)
+    e.preventDefault()
+    if (!questTask){
+    } else if (questTask && isEditing){
+      setQuestList(
+        questList.map((item)=>{
+          if(item.id === editId){
+            return {...item,title:questTask}
+          }
+          return item;
+        })
+      )
+      setQuestTask('')
+      setIsEditing(false)
+      setEditId(null)
+    } else {
+      const newItem = { id: new Date().getTime().toString(),title: questTask,type: e.target.id}
+      setQuestList( [...questList,newItem])
+      setQuestTask('')
+    }
+  }
+
   return (
    <main>
      <section>
-      <MainQuestForm
-        mainQuestTask={mainQuestTask} setMainQuestTask={setMainQuestTask}
-        mainQuestList={mainQuestList} setMainQuestList={setMainQuestList}
-        handleSubmit={handleSubmit}
-      />
+       <div>
+         <form action="" onSubmit={handleSubmitGeneral}>
+           <input type="text"
+           value={questTask}
+           onChange={(e)=> setQuestTask(e.target.value)}
+           />
+           <button type='submit'>enviar</button>
+           <select value={setSelectvalue} name="type_input" id="type_input">
+             <option value="main">MainQuest</option>
+             <option value="side">SideQuest</option>
+             <option value="daily">DailyQuest</option>
+           </select>
+  
+         </form>
+       </div>
+      {/* <MainQuestForm
+        // mainQuestTask={mainQuestTask} setMainQuestTask={setMainQuestTask}
+        // mainQuestList={mainQuestList} setMainQuestList={setMainQuestList}
+        mainQuestTask={questTask} setMainQuestTask={setQuestTask}
+        mainQuestList={questList} setMainQuestList={setQuestList}
+        handleSubmit={handleSubmitGeneral}
+      /> */}
       <MainQuestList 
-      mainQuestList={mainQuestList}
-      mainTaskCompleted={mainTaskCompleted}
-      mainTaskEdited={mainTaskEdited} 
+       mainQuestList={questList}
+       mainTaskCompleted={mainTaskCompleted}
+       mainTaskEdited={mainTaskEdited} 
      />
       <SideQuestForm
-        sideQuestTask={sideQuestTask} setSideQuestTask={setSideQuestTask}
-        sideQuestList={sideQuestList} setSideQuestList={setSideQuestList}
-        sideHandleSubmit={sideHandleSubmit}
+        // sideQuestTask={sideQuestTask} setSideQuestTask={setSideQuestTask}
+        // sideQuestList={sideQuestList} setSideQuestList={setSideQuestList}
+        sideQuestTask={questTask} setSideQuestTask={setQuestTask}
+        sideQuestList={questList} setSideQuestList={setQuestList}
+        sideHandleSubmit={handleSubmitGeneral}
       />
-      <SideQuestList sideQuestList={sideQuestList} 
+      <SideQuestList sideQuestList={questList} 
         sideTaskCompleted={sideTaskCompleted}
         sideTaskEdited={sideTaskEdited} 
       />

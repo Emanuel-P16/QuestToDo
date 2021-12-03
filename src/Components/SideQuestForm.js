@@ -2,7 +2,7 @@
 
 const SideQuestForm = ({sideQuestTask,setSideQuestTask,sideQuestList,setSideQuestList,sideHandleSubmit}) => {
     return (
-        <form action="" onSubmit={sideHandleSubmit}>
+        <form action="" id="side" onSubmit={sideHandleSubmit}>
         <h3>SIDE QUESTS</h3>
         <input 
         type="text"

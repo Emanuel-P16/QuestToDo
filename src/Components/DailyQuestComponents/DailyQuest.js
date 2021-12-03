@@ -1,7 +1,7 @@
 import DailyForm from './DailyForm'
 import DailyList from './DailyList'
 const DailyQuest = ({dailyQuestTask,setDailyQuestTask, dailyQuestList, setDailyQuestList,dailyTaskCompleted}) => {
-    console.log(dailyQuestList)
+    // console.log(dailyQuestList)
     return (
         <section>
          <DailyForm dailyQuestTask={dailyQuestTask} setDailyQuestTask={setDailyQuestTask}/>

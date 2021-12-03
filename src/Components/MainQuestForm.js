@@ -1,6 +1,6 @@
 const MainQuestForm = ({mainQuestTask,setMainQuestTask,mainQuestList,setMainQuestList,handleSubmit}) => {
     return  (
-        <form action="" onSubmit={handleSubmit}>
+        <form action="" id="main" onSubmit={handleSubmit}>
             <h3>MAIN QUESTS</h3>
             <input 
             type="text"
