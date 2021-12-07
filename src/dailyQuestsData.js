@@ -11,14 +11,17 @@ const DailyQuests = [
     {
         id: 1,
         title:'Make Bed',
+        type:'daily',
         completed: false,
     },{
         id: 2,
         title:'Walk The Dog',
+        type:'daily',
         completed: false,
     },{
         id: 3,
         title:'Be the greates programmer of argentina',
+        type:'daily',
         completed: false,
     }
 ]

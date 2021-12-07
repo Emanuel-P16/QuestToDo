@@ -5,11 +5,74 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: rgb(17, 17, 17);
 }
 
+:root{
+  /* title colors */
+  --clr-grey-1: hsl(45, 18%, 50%);
+  /* Text color for quests */
+  --clr-white-1: rgb(211, 211, 211);
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+main{
+  display: flex;
+  flex-direction: column;
+}
+h3{
+  color: var(--clr-grey-1);
+  
+}
+p{
+ color: var( --clr-white-1);
+}
+.header{
+  display: flex;
+  }
+.level *{
+  margin: 0;
+}
+.formContainer{
+  margin: 0.5rem auto;
+}
+
+.form input{
+  border: 2px rgb(92, 79, 67) solid ;
+  border-radius: 5px;
+}
+
+.form input:focus{
+   outline: none;
+   border: 2px solid rgb(209, 171, 135);
+}
+.form button,select{
+  background-color: rgb(131, 114, 97);
+  border: 2px rgb(92, 79, 67) solid ;
+  height: 1.5rem;
+  font-weight: bold;
+  margin-left: 0.25rem;
+  border-radius: 0.5rem;
+}
+.form button:hover,select:hover{
+  background-color: rgb(82, 75, 68);
+  cursor: pointer;
+}
+
+.questContainer{
+  margin-top: 2rem;
+  margin-left: 2rem;
+  width: 40vw;
+}
+
+.quest{
+  
+  margin-bottom: 1rem;
+}
+.quest:hover{
+  border: 2px var(--clr-grey-1) solid;
 }
 .completed{
   color: gray;
