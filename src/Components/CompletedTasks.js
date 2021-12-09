@@ -1,12 +1,18 @@
+import { useState } from "react/cjs/react.development"
+
 const CompletedTasks = ({completedTasks,setCompletedTasks}) => {
+    const [showInfo,setShowInfo] = useState(false)
     return ( 
       <div>
-          <h3>Completed Tasks</h3>
-          {console.log(completedTasks)}
-          {completedTasks.map((task,index) => {
-               return( <article key={index}>
-                    <p>{task.title}</p>
-                </article> )
+         <button className="showInfo" onClick={() => setShowInfo(!showInfo)}>
+                <h3>Completed Quests {showInfo ? "-" : "+"}</h3>
+            
+            </button>
+          {showInfo && completedTasks.map((task,index) => {
+               return(
+                  <article key={index}>
+                    <p className="completed">{task.title}</p>
+                  </article> )
             })
         }
       </div>

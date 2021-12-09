@@ -6,6 +6,12 @@ import DailyData from './dailyQuestsData'
 import FormTask from "./Components/FormTask";
 import CompletedTasks from "./Components/CompletedTasks";
 
+/// fontawesome
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fab } from '@fortawesome/free-brands-svg-icons'
+import { faExclamation } from "@fortawesome/free-solid-svg-icons";
+
+library.add(fab,faExclamation)
 const getLocalStorage = () =>{
   let  questList = localStorage.getItem('List')
   if (questList){
@@ -44,7 +50,7 @@ function App() {
    useEffect(() => {
      localStorage.setItem('List',JSON.stringify(questList))
      localStorage.setItem('CompletedList',JSON.stringify(completedTasks))
-   }, [questList])
+   }, [questList,completedTasks])
 
 
 
@@ -94,7 +100,7 @@ function App() {
         setQuestTask={setQuestTask}
        />
       <div className="level">
-        <h3>Level 30</h3>
+        {/* <h3>Level 30</h3> */}
       </div>
        </section>
      <section className="questContainer">
