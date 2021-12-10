@@ -1,4 +1,4 @@
-import { useState } from "react/cjs/react.development"
+import { useState } from "react"
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 // import { faExclamation } from "@fortawesome/free-solid-svg-icons"
 import Objectives from './Objectives'

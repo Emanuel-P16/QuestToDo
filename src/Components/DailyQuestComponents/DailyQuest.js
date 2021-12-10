@@ -1,5 +1,5 @@
 
-import { useState } from 'react/cjs/react.development'
+import { useState } from "react"
 import DailyList from './DailyList'
 const DailyQuest = ({dailyQuestList, setDailyQuestList,dailyTaskCompleted}) => {
     // console.log(dailyQuestList)
