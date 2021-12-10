@@ -28,6 +28,14 @@ const getLocalStorageCompleted = () =>{
     return []
   }
 }
+const getLocalStorageObjective = () => {
+  let objectiveList = localStorage.getItem('ObjectiveList')
+  if (objectiveList){
+    return ( objectiveList = JSON.parse(localStorage.getItem('ObjectiveList')))
+  } else{
+    return []
+  }
+}
 function App() {
   // useState Hooks
  
@@ -37,7 +45,10 @@ function App() {
   const [editId,setEditId] = useState(null)
   const [completedTasks,setCompletedTasks] = useState(getLocalStorageCompleted())
  
-
+// Objective hooks
+const [objective,setObjective] = useState('')
+const [objectiveList,setObjectiveList] = useState(getLocalStorageObjective())
+const [edit,setEdit] = useState('')
   
   
   const TaskEdited = (id) => {
@@ -50,7 +61,8 @@ function App() {
    useEffect(() => {
      localStorage.setItem('List',JSON.stringify(questList))
      localStorage.setItem('CompletedList',JSON.stringify(completedTasks))
-   }, [questList,completedTasks])
+     localStorage.setItem('ObjectiveList',JSON.stringify(objectiveList))
+   }, [questList,completedTasks,objectiveList])
 
 
 
@@ -90,7 +102,14 @@ function App() {
   }
 
   
- 
+  const handleSubmitObjective = (e) => {
+    e.preventDefault()
+    const newObjective = { id: new Date().getTime().toString(), title: objective, type:objective,idd:edit,completed: false}
+    setObjectiveList( [...objectiveList,newObjective] )
+    setObjective('')
+    
+}
+
   return (
    <main>
       <section className="header"> 
@@ -108,6 +127,11 @@ function App() {
        mainQuestList={questList}
        mainTaskCompleted={taskCompleted}
        mainTaskEdited={TaskEdited} 
+       objective={objective} setObjective={setObjective}
+       objectiveList={objectiveList} setObjectiveList={setObjectiveList}
+       handleSubmitObjective={handleSubmitObjective}
+       edit={edit}
+       setEdit={setEdit}
      />
       <SideQuestList sideQuestList={questList} 
         sideTaskCompleted={taskCompleted}

@@ -136,4 +136,18 @@ p{
 }
 .buttonQuests{
   margin-left: 1rem;
+  margin-top: 0.5rem;
+}
+
+.objectiveForm{
+  margin-left: 2rem;
+  margin-bottom: 0.5rem;
+}
+.objective{
+  color: white;
+  margin-left: 2rem;
+  font-size: 0.75rem;
+}
+.objective * {
+  margin: 0;
 }

@@ -6,7 +6,7 @@ const FormTask = ({handleSubmit,questTask,setQuestTask}) => {
            value={questTask}
            onChange={(e)=> setQuestTask(e.target.value)}
            />
-           <button type='submit'>Enviar</button>
+           <button type="submit">Enviar</button>
            <select  name="type_input" id="type_input">
              <option value="main">MainQuest</option>
              <option value="side">SideQuest</option>
