@@ -28,7 +28,7 @@ const MainQuestList = ({mainQuestList,mainTaskCompleted,mainTaskEdited,objective
                     }}>
                         <article className="quest">
                             <div className="titleQuests"> 
-                                <FontAwesomeIcon className="icon" icon={faExclamation}/>
+                                {/* <FontAwesomeIcon className="icon" icon={faExclamation}/> */}
                                 <p className={mainTask.completed ? 'completed' : null}>{mainTask.title}</p> 
                             </div>
                             {showObj  &&

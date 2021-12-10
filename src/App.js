@@ -7,11 +7,11 @@ import FormTask from "./Components/FormTask";
 import CompletedTasks from "./Components/CompletedTasks";
 
 /// fontawesome
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { fab } from '@fortawesome/free-brands-svg-icons'
-import { faExclamation } from "@fortawesome/free-solid-svg-icons";
+// import { library } from "@fortawesome/fontawesome-svg-core";
+// import { fab } from '@fortawesome/free-brands-svg-icons'
+// import { faExclamation } from "@fortawesome/free-solid-svg-icons";
 
-library.add(fab,faExclamation)
+// library.add(fab,faExclamation)
 const getLocalStorage = () =>{
   let  questList = localStorage.getItem('List')
   if (questList){
