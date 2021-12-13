@@ -100,7 +100,8 @@ p{
 
 .questbutton{
   height: 100%;
-  width: 80vw;
+  width: 95%;
+  margin-left: 0.5rem;
   margin-right: 10rem;
   background-color: transparent;
   border: none;
@@ -122,6 +123,7 @@ p{
 }
 .titleQuests{
   display: flex;
+  word-break: break-all;
   
 }
 .titleQuests p{
@@ -147,7 +149,56 @@ p{
   color: white;
   margin-left: 2rem;
   font-size: 0.75rem;
+  word-break: break-all;
+  margin-right: 0.25rem;
+  
 }
 .objective * {
   margin: 0;
+}
+
+
+.profile{
+  color: white;
+}
+
+
+.mainQuestList{
+  border: var(--clr-grey-1) solid 1px;
+  margin-bottom: 0.25rem;
+}
+
+.grid{
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  
+
+}
+/*POMODORO  */
+.pomodoro{
+  height: 96%;
+  color: white;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  border: 1px solid var(--clr-grey-1);
+  display: flex;
+  flex-direction: column;
+ 
+}
+.pomodoro button {
+  width: 40%;
+  margin: 0 auto;
+}
+.pomodoroTimerMessage{
+  margin: 0 auto;
+}
+.timer{
+  font-size: 10rem;
+  margin: 0 auto;
+}
+
+
+/* PROFILE */
+.profile img {
+  border-radius: 10%;
 }

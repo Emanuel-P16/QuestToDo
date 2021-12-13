@@ -5,7 +5,7 @@ const DailyQuest = ({dailyQuestList, setDailyQuestList,dailyTaskCompleted}) => {
     // console.log(dailyQuestList)
     const [showInfo,setShowInfo] = useState(true)
     return (
-        <section>
+        <section className="mainQuestList">
           <button className="showInfo" onClick={() => setShowInfo(!showInfo)}>
                 <h3>Daily Quests {showInfo ? "-" : "+"}</h3>
             </button>

@@ -9,7 +9,7 @@ const MainQuestList = ({mainQuestList,mainTaskCompleted,mainTaskEdited,objective
     const [idShow,setIdShow] = useState('')
 
     return (
-        <div>
+        <div className="mainQuestList">
             <button className="showInfo" onClick={() => setShowInfo(!showInfo)}>
                 <h3>Main Quests {showInfo ? "-" : "+"}</h3>
             </button>

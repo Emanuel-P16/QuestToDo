@@ -5,6 +5,11 @@ import DailyQuest from './Components/DailyQuestComponents/DailyQuest'
 import DailyData from './dailyQuestsData'
 import FormTask from "./Components/FormTask";
 import CompletedTasks from "./Components/CompletedTasks";
+import { LoginButton } from "./Components/Login/Login";
+import Profile from "./Components/Login/Profile";
+import { LogoutButton } from "./Components/Login/LogOut";
+import { useAuth0 } from "@auth0/auth0-react";
+import Pomodoro from "./Components/Pomodoro/Pomodoro";
 
 /// fontawesome
 // import { library } from "@fortawesome/fontawesome-svg-core";
@@ -49,7 +54,8 @@ function App() {
 const [objective,setObjective] = useState('')
 const [objectiveList,setObjectiveList] = useState(getLocalStorageObjective())
 const [edit,setEdit] = useState('')
-  
+// useAuth0
+const {isAuthenticated} = useAuth0()  
   
   const TaskEdited = (id) => {
     const taskToEdit = questList.find((item) => item.id === id)
@@ -111,8 +117,13 @@ const [edit,setEdit] = useState('')
 }
 
   return (
-   <main>
-      <section className="header"> 
+      <main>
+        {isAuthenticated ?  
+        <div>
+         <Profile />
+        <LogoutButton/> 
+        
+        <section className="header"> 
         <FormTask 
         handleSubmit={handleSubmit}
         questTask={questTask}
@@ -122,6 +133,7 @@ const [edit,setEdit] = useState('')
         {/* <h3>Level 30</h3> */}
       </div>
        </section>
+     <div className="grid">  
      <section className="questContainer">
       <MainQuestList 
        mainQuestList={questList}
@@ -147,6 +159,18 @@ const [edit,setEdit] = useState('')
        setCompletedTasks={setCompletedTasks}
        />
      </section>
+     <section>
+     <Pomodoro />
+     </section>
+     </div>
+        
+        </div> 
+        
+        
+        : <LoginButton />}
+        {/* <Profile />
+        <LogoutButton/> */}
+      
    </main>
   );
 }

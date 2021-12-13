@@ -3,7 +3,7 @@ import { useState } from "react"
 const CompletedTasks = ({completedTasks,setCompletedTasks}) => {
     const [showInfo,setShowInfo] = useState(false)
     return ( 
-      <div>
+      <div className="mainQuestList">
          <button className="showInfo" onClick={() => setShowInfo(!showInfo)}>
                 <h3>Completed Quests {showInfo ? "-" : "+"}</h3>
             

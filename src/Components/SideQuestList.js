@@ -2,7 +2,7 @@ import { useState } from "react"
 const SideQuestList = ({sideQuestList, sideTaskCompleted, sideTaskEdited}) => {
     const [showInfo,setShowInfo] = useState(true)
     return (
-        <div>
+        <div className="mainQuestList">
             <button className="showInfo" onClick={() => setShowInfo(!showInfo)}>
                 <h3>Side Quests {showInfo ? "-" : "+"}</h3>
             </button>
