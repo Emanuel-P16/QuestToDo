@@ -55,7 +55,8 @@ const [objective,setObjective] = useState('')
 const [objectiveList,setObjectiveList] = useState(getLocalStorageObjective())
 const [edit,setEdit] = useState('')
 // useAuth0
-const {isAuthenticated} = useAuth0()  
+// const {isAuthenticated} = useAuth0()
+const isAuthenticated  = true  
   
   const TaskEdited = (id) => {
     const taskToEdit = questList.find((item) => item.id === id)
@@ -130,7 +131,7 @@ const {isAuthenticated} = useAuth0()
         setQuestTask={setQuestTask}
        />
       <div className="level">
-        {/* <h3>Level 30</h3> */}
+       
       </div>
        </section>
      <div className="grid">  
