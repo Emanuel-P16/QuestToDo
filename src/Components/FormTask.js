@@ -8,8 +8,8 @@ const FormTask = ({handleSubmit,questTask,setQuestTask}) => {
            />
            <button type="submit">Enviar</button>
            <select  name="type_input" id="type_input">
-             <option value="main">MainQuest</option>
-             <option value="side">SideQuest</option>
+             <option value="M">MainQuest</option>
+             <option value="S">SideQuest</option>
            </select>
   
          </form>

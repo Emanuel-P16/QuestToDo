@@ -7,18 +7,18 @@ const SideQuestList = ({sideQuestList, sideTaskCompleted, sideTaskEdited}) => {
                 <h3>Side Quests {showInfo ? "-" : "+"}</h3>
             </button>
            {showInfo && sideQuestList.map((sideQuestTask) => {
-               if (sideQuestTask.type === 'side') {
+               if (sideQuestTask.type === 'S') {
 
                
                return(
-                    <div tabIndex="2" key={sideQuestTask.id} className="questbutton">
+                    <div tabIndex="2" key={sideQuestTask._id} className="questbutton">
                         <article className="quest" >
                             <div>
-                             <p className={sideQuestTask.completed ? 'completed' : null}>{sideQuestTask.title}</p>
+                             <p className={sideQuestTask.completed ? 'completed' : null}>{sideQuestTask.name}</p>
                             </div>
                             <div>
-                             <button type='submit' onClick={() => sideTaskEdited(sideQuestTask.id)}>Edit</button>
-                             <button type='submit' onClick={() => sideTaskCompleted(sideQuestTask.id)}>Completed</button>
+                             <button type='submit' onClick={() => sideTaskEdited(sideQuestTask._id)}>Edit</button>
+                             <button type='submit' onClick={() => sideTaskCompleted(sideQuestTask._id)}>Completed</button>
                             </div>
                         </article>
                     </div>

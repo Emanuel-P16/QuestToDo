@@ -9,11 +9,13 @@ const CompletedTasks = ({completedTasks,setCompletedTasks}) => {
             
             </button>
           {showInfo && completedTasks.map((task,index) => {
+            if (task.type === "C"){ 
                return(
                   <article key={index}>
-                    <p className="completed">{task.title}</p>
+                    <p className="completed">{task.name}</p>
                   </article> )
-            })
+            }})
+            
         }
       </div>
        

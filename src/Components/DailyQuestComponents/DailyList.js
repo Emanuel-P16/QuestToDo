@@ -4,12 +4,13 @@ const DailyList = ({dailyQuestList, dailyTaskCompleted}) => {
         <div>
             
             {dailyQuestList.map((quest,index) => {
-                if (quest.type === 'daily'){
+                if (quest.type === 'D'){
                  return( 
                     <div tabIndex="3" key={index} className="questbutton">
                      <article  className="quest" >
+                         
                          <div>
-                             <p className={quest.completed ? 'completed' : null}>{quest.title}</p>
+                             <p className={quest.completed ? 'completed' : null}>{'Work in progress'}</p>
                          </div>
                          <div>
                              <button onClick={() => dailyTaskCompleted(quest.id)}>Completed</button>

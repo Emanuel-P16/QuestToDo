@@ -14,36 +14,36 @@ const MainQuestList = ({mainQuestList,mainTaskCompleted,mainTaskEdited,objective
                 <h3>Main Quests {showInfo ? "-" : "+"}</h3>
             </button>
             {showInfo && mainQuestList.map((mainTask)=>{
-                if(mainTask.type === "main"){
+                if(mainTask.type === "M"){
                 return(
                     
-                    <div  tabIndex="1" key={mainTask.id} className="questbutton" onClick={()=> {
-                        if (idShow === mainTask.id) {
+                    <div  tabIndex="1" key={mainTask._id} className="questbutton" onClick={()=> {
+                        if (idShow === mainTask._id) {
                             setShowObj(true)
-                            setIdShow(mainTask.id)
+                            setIdShow(mainTask._id)
                         } else {         
-                            setIdShow(mainTask.id)
+                            setIdShow(mainTask._id)
                             setShowObj(true)
                         }
                     }}>
                         <article className="quest">
                             <div className="titleQuests"> 
                                 {/* <FontAwesomeIcon className="icon" icon={faExclamation}/> */}
-                                <p className={mainTask.completed ? 'completed' : null}>{mainTask.title}</p> 
+                                <p className={mainTask.completed ? 'completed' : null}>{mainTask.name}</p> 
                             </div>
                             {showObj  &&
                              <Objectives 
                                 objective={objective} setObjective={setObjective}
                                 objectiveList={objectiveList} setObjectiveList={setObjectiveList}
                                 handleSubmitObjective={handleSubmitObjective}
-                                mainTask={mainTask.id}
+                                mainTask={mainTask._id}
                                 idShow={idShow} setIdShow={setIdShow}
                                 edit={edit}
                                 setEdit={setEdit}
                             />}
                             <div className="buttonQuests">
-                            <button type='submit' onClick={() => mainTaskEdited(mainTask.id)}>Edit</button>
-                            <button type='submit' onClick={() => mainTaskCompleted(mainTask.id)}>Completed</button>
+                            <button type='submit' onClick={() => mainTaskEdited(mainTask._id)}>Edit</button>
+                            <button type='submit' onClick={() => mainTaskCompleted(mainTask._id)}>Completed</button>
                             </div>
                         </article>
                     </div>

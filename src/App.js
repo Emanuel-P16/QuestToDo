@@ -2,13 +2,13 @@ import React,{useState,useEffect} from "react";
 import MainQuestList from "./Components/MainQuestList"
 import SideQuestList from "./Components/SideQuestList";
 import DailyQuest from './Components/DailyQuestComponents/DailyQuest'
-import DailyData from './dailyQuestsData'
+// import DailyData from './dailyQuestsData'
 import FormTask from "./Components/FormTask";
 import CompletedTasks from "./Components/CompletedTasks";
 import { LoginButton } from "./Components/Login/Login";
 import Profile from "./Components/Login/Profile";
 import { LogoutButton } from "./Components/Login/LogOut";
-import { useAuth0 } from "@auth0/auth0-react";
+// import { useAuth0 } from "@auth0/auth0-react";
 import Pomodoro from "./Components/Pomodoro/Pomodoro";
 
 /// fontawesome
@@ -17,14 +17,14 @@ import Pomodoro from "./Components/Pomodoro/Pomodoro";
 // import { faExclamation } from "@fortawesome/free-solid-svg-icons";
 
 // library.add(fab,faExclamation)
-const getLocalStorage = () =>{
-  let  questList = localStorage.getItem('List')
-  if (questList){
-    return (questList = JSON.parse(localStorage.getItem('List')))
-  } else {
-    return DailyData
-  }
-}
+// const getLocalStorage = () =>{
+//   let  questList = localStorage.getItem('List')
+//   if (questList){
+//     return (questList = JSON.parse(localStorage.getItem('List')))
+//   } else {
+//     return DailyData
+//   }
+// }
 const getLocalStorageCompleted = () =>{
   let completedList = localStorage.getItem('CompletedList')
   if (completedList) {
@@ -45,7 +45,7 @@ function App() {
   // useState Hooks
  
   const [questTask,setQuestTask] = useState('');
-  const [questList,setQuestList] = useState(getLocalStorage())
+  const [questList,setQuestList] = useState([])//getLocalStorage())
   const [isEditing,setIsEditing] = useState(false)
   const [editId,setEditId] = useState(null)
   const [completedTasks,setCompletedTasks] = useState(getLocalStorageCompleted())
@@ -58,30 +58,67 @@ const [edit,setEdit] = useState('')
 // const {isAuthenticated} = useAuth0()
 const isAuthenticated  = true  
   
-  const TaskEdited = (id) => {
-    const taskToEdit = questList.find((item) => item.id === id)
-    setIsEditing(true);
-    setEditId(id)
-    setQuestTask(taskToEdit.title)
+  const getDatabaseList = async() => {
+    const timeout = setTimeout(async() => {
+      const url = 'http://localhost:8080/api/quests'
+      const response = await fetch(url,{
+        method: 'GET',
+        mode: 'cors',
+        headers: {
+          'content-type':'application/json'
+        }
+      })
+      const data = await response.json()
+       setQuestList(data.quests)
+    }, 600);
+    
+    
   }
 
-   useEffect(() => {
-     localStorage.setItem('List',JSON.stringify(questList))
-     localStorage.setItem('CompletedList',JSON.stringify(completedTasks))
-     localStorage.setItem('ObjectiveList',JSON.stringify(objectiveList))
-   }, [questList,completedTasks,objectiveList])
+  useEffect(()=>{
+   
+      getDatabaseList()
+  
+    
+  },[questList])
+
+  const TaskEdited = (id) => {
+    const taskToEdit = questList.find((item) => item._id === id)
+    setIsEditing(true);
+    setEditId(id)
+    setQuestTask(taskToEdit.name)
+  }
+
+  //  useEffect(() => {
+     
+  //   //  fetch('http://localhost:8080/api/quests')
+  //   //  localStorage.setItem('List',JSON.stringify(questList))
+  //   //  localStorage.setItem('CompletedList',JSON.stringify(completedTasks))
+  //   //  localStorage.setItem('ObjectiveList',JSON.stringify(objectiveList))
+  //  }, [questList,completedTasks,objectiveList])
 
 
 
  // factorizacion de las listas para que sea solo una funcion para todas las listas
 
   const taskCompleted = (id) => {
-    const item = questList.find((item)=> item.id === id) 
+    const item = questList.find((item)=> item._id === id) 
     item.completed = (!item.completed)
+    item.type = "C"
+   
     setQuestList([...questList])
     const timeout = setTimeout(() => {
-      setCompletedTasks([...completedTasks, questList.find((item) => item.id === id)])
-      setQuestList(questList.filter((item) => item.id !== id))
+      // setCompletedTasks([...completedTasks, questList.find((item) => item._id === id)])
+      // setQuestList(questList.filter((item) => item._id !== id))
+      fetch('http://localhost:8080/api/quests',{
+        method: 'PUT',
+        headers:{'Accept':'application/json',
+                 'Content-type':'application/json',
+              },
+        body:JSON.stringify(item)
+      })
+      .then( res => res.json())
+      .then( res => console.log(res))
     }, 3000);
     return () => clearTimeout(timeout)
   }
@@ -92,8 +129,20 @@ const isAuthenticated  = true
     } else if (questTask && isEditing){
       setQuestList(
         questList.map((item)=>{
-          if(item.id === editId){
-            return {...item,title:questTask}
+          if(item._id === editId){
+            item.name = questTask
+            fetch('http://localhost:8080/api/quests',{
+              method: 'PUT',
+              headers:{
+              'Accept':'application/json',
+              'Content-type':'application/json'
+            },
+            body: JSON.stringify(item)
+            
+          })
+          .then( res => res.json())
+          .then( res => console.log(res))
+            return {...item,name:questTask}
           }
           return item;
         })
@@ -102,9 +151,20 @@ const isAuthenticated  = true
       setIsEditing(false)
       setEditId(null)
     } else {
-      const newItem = { id: new Date().getTime().toString(),title: questTask,type: e.target[2].value, completed: false}
+      const newItem = { _id: new Date().getTime().toString(),name: questTask,type: e.target[2].value, completed: false,user_id:'test1'}
       setQuestList( [...questList,newItem])
       setQuestTask('')
+      fetch('http://localhost:8080/api/quests',{
+        method: 'POST',
+        headers:{
+        'Accept':'application/json',
+        'Content-type':'application/json'
+      },
+      body: JSON.stringify(newItem)
+      
+    })
+    .then( res => res.json())
+    .then( res => console.log(res))
     }
   }
 
@@ -123,7 +183,7 @@ const isAuthenticated  = true
         <div>
          <Profile />
         <LogoutButton/> 
-        
+     
         <section className="header"> 
         <FormTask 
         handleSubmit={handleSubmit}
@@ -156,8 +216,8 @@ const isAuthenticated  = true
        dailyTaskCompleted={taskCompleted}
        />
        <CompletedTasks 
-       completedTasks={completedTasks}
-       setCompletedTasks={setCompletedTasks}
+       completedTasks={questList}
+      //  setCompletedTasks={}
        />
      </section>
      <section>
