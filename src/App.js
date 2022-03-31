@@ -56,11 +56,12 @@ const [objectiveList,setObjectiveList] = useState(getLocalStorageObjective())
 const [edit,setEdit] = useState('')
 // useAuth0
 // const {isAuthenticated} = useAuth0()
+const [url,setUrl] = useState('https://questtodoapi.herokuapp.com/api/quests')
 const isAuthenticated  = true  
   
   const getDatabaseList = async() => {
     const timeout = setTimeout(async() => {
-      const url = 'http://localhost:8080/api/quests'
+      // const url = 'http://localhost:8080/api/quests'
       const response = await fetch(url,{
         method: 'GET',
         mode: 'cors',
@@ -110,7 +111,7 @@ const isAuthenticated  = true
     const timeout = setTimeout(() => {
       // setCompletedTasks([...completedTasks, questList.find((item) => item._id === id)])
       // setQuestList(questList.filter((item) => item._id !== id))
-      fetch('http://localhost:8080/api/quests',{
+      fetch(url,{
         method: 'PUT',
         headers:{'Accept':'application/json',
                  'Content-type':'application/json',
@@ -131,7 +132,7 @@ const isAuthenticated  = true
         questList.map((item)=>{
           if(item._id === editId){
             item.name = questTask
-            fetch('http://localhost:8080/api/quests',{
+            fetch(url,{
               method: 'PUT',
               headers:{
               'Accept':'application/json',
@@ -154,7 +155,7 @@ const isAuthenticated  = true
       const newItem = { _id: new Date().getTime().toString(),name: questTask,type: e.target[2].value, completed: false,user_id:'test1'}
       setQuestList( [...questList,newItem])
       setQuestTask('')
-      fetch('http://localhost:8080/api/quests',{
+      fetch(url,{
         method: 'POST',
         headers:{
         'Accept':'application/json',
