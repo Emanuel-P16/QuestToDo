@@ -20,7 +20,7 @@ const DailyQuests = [
         completed: false,
     },{
         id: 3,
-        title:'Be the greates programmer of argentina',
+        title:'make banana bread',
         type:'daily',
         completed: false,
     }
