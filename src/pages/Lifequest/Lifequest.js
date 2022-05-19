@@ -125,6 +125,7 @@ const Lifequest = () => {
     setObjectiveList([...objectiveList, newObjective])
     setObjective('')
   }
+  console.log(questList)
   return (
     <main>
       <div>
