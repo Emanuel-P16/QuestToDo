@@ -5,11 +5,11 @@ import DailyQuest from '../../Components/DailyQuestComponents/DailyQuest'
 // import DailyData from './dailyQuestsData'
 import FormTask from "../../Components/FormTask";
 import CompletedTasks from "../../Components/CompletedTasks"
-import { LoginButton } from "../../Components/Login/Login";
-import Profile from "../../Components/Login/Profile";
-import { LogoutButton } from "../../Components/Login/LogOut";
+// import { LoginButton } from "../../Components/Login/Login";
+// import Profile from "../../Components/Login/Profile";
+// import { LogoutButton } from "../../Components/Login/LogOut";
 // import { useAuth0 } from "@auth0/auth0-react";
-import Pomodoro from "../../Components/Pomodoro/Pomodoro";
+// import Pomodoro from "../../Components/Pomodoro/Pomodoro";
 import useFetch from "../../hooks/useFetch";
 const getLocalStorageCompleted = () => {
   let completedList = localStorage.getItem('CompletedList')
@@ -125,7 +125,7 @@ const Lifequest = () => {
     setObjectiveList([...objectiveList, newObjective])
     setObjective('')
   }
-  console.log(questList)
+  console.log(questList[0].objectives)
   return (
     <main>
       <div>
