@@ -125,7 +125,7 @@ const Lifequest = () => {
     setObjectiveList([...objectiveList, newObjective])
     setObjective('')
   }
-  console.log(questList[0].objectives)
+
   return (
     <main>
       <div>
@@ -144,6 +144,7 @@ const Lifequest = () => {
           <section className="questContainer">
             <MainQuestList
               mainQuestList={questList}
+              setQuestList={setQuestList}
               mainTaskCompleted={taskCompleted}
               mainTaskEdited={TaskEdited}
               objective={objective} setObjective={setObjective}

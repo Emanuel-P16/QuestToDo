@@ -3,7 +3,7 @@ import { useState } from "react"
 // import { faExclamation } from "@fortawesome/free-solid-svg-icons"
 import Objectives from './Objectives'
 
-const MainQuestList = ({mainQuestList,mainTaskCompleted,mainTaskEdited,objective,setObjective,objectiveList,setObjectiveList,handleSubmitObjective,edit,setEdit}) => {
+const MainQuestList = ({mainQuestList,setQuestList,mainTaskCompleted,mainTaskEdited,objective,setObjective,objectiveList,setObjectiveList,handleSubmitObjective,edit,setEdit}) => {
     const [showInfo,setShowInfo] = useState(true)
     const [showObj,setShowObj] = useState(false)
     const [idShow,setIdShow] = useState('')
@@ -38,8 +38,10 @@ const MainQuestList = ({mainQuestList,mainTaskCompleted,mainTaskEdited,objective
                                 handleSubmitObjective={handleSubmitObjective}
                                 mainTask={mainTask._id}
                                 idShow={idShow} setIdShow={setIdShow}
-                                edit={edit}
-                                setEdit={setEdit}
+                                mainQuestList={mainQuestList}
+                                setQuestList={setQuestList}
+                                // edit={edit}
+                                // setEdit={setEdit}
                             />}
                             <div className="buttonQuests">
                             <button type='submit' onClick={() => mainTaskEdited(mainTask._id)}>Edit</button>

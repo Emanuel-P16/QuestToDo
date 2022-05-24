@@ -1,8 +1,8 @@
 import FormObjective from './FormObjective'
 import ObjectiveList from './ObjectiveList'
 
-const Objectives = ({objective,setObjective,objectiveList,setObjectiveList,handleSubmitObjective,mainTask,edit,setEdit,idShow,setIdShow}) => {
-    
+const Objectives = ({objective,setObjective,objectiveList,setObjectiveList,handleSubmitObjective,mainTask,edit,setEdit,idShow,setIdShow,mainQuestList,setQuestList}) => {
+  
     if (idShow === mainTask){
         return (
         
@@ -20,7 +20,9 @@ const Objectives = ({objective,setObjective,objectiveList,setObjectiveList,handl
     
                 <ObjectiveList 
                 objectiveList={objectiveList} setObjectiveList={setObjectiveList}
-                mainTask={mainTask} 
+                mainTask={mainTask}
+                mainQuestList={mainQuestList}
+                setQuestList={setQuestList}
                 />
             </div>
         )

@@ -1,24 +1,46 @@
 
 
-const ObjectiveList = ({objectiveList,setObjectiveList,mainTask}) => {
-    const completedObj = (id) => {
-            const item = objectiveList.find((item)=> item.id === id) 
-            item.completed = (!item.completed)
-            setObjectiveList([...objectiveList])
-    } 
-    return (
-        <div>
-            {objectiveList.map((obj,index)=>{
-                if(mainTask === obj.idd){
-                return(
-                    <div className='objective' key={index}>
-                        <h4 onClick={() => completedObj(obj.id)} className={obj.completed ? 'completed' : null}>{obj.title}</h4>
-                        </div>
+const ObjectiveList = ({objectiveList,setObjectiveList,mainTask,mainQuestList,setQuestList}) => {
+    const completedObj = (x,obj) => {
+        
+       
+        obj.completed = (!obj.completed)
+        fetch(`http://localhost:8080/api/quests/${x._id}`,{
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-type':'application/json'
+            },
+            body: JSON.stringify(x)
+        })
+        .then(res=> res.json())
+        
+        mainQuestList.map((object)=>{
+            if(object._id === x._id){
+                setQuestList([...mainQuestList])
                     
-                )} else {return null}
-            })}
-        </div>
-    )
+            }})
+      
+    } 
+   
+
+        return (
+            mainQuestList.map((x)=>{
+                if(mainTask === x._id){
+                    return (x.objectives.map((obj,index) =>{
+                        return(
+                            <div className='objective' key={index}>
+                                <h4 onClick={() => completedObj(x,obj)} className={obj.completed ? 'completed' : null}>{obj.name}</h4>
+                            </div>
+                        )
+                    }))
+                }
+             return null
+            })
+        )
+
+    
 }
 
 export default ObjectiveList
+
