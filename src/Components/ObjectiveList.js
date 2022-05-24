@@ -5,7 +5,7 @@ const ObjectiveList = ({objectiveList,setObjectiveList,mainTask,mainQuestList,se
         
        
         obj.completed = (!obj.completed)
-        fetch(`http://localhost:8080/api/quests/${x._id}`,{
+        fetch(`https://questtodoapi.herokuapp.com/api/quests/${x._id}`,{
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',
