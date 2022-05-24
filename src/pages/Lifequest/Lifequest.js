@@ -105,7 +105,7 @@ const Lifequest = () => {
     } else {
       const newItem = {
         name: questTask, type: e.target[2].value, user_id: "6287d13b98054f262c33458b", completed: false, objectives: [{
-          "name": "funciona",
+          "name": "",
           "completed": false
         }]
       }
