@@ -7,7 +7,7 @@ const MainQuestList = ({mainQuestList,setQuestList,mainTaskCompleted,mainTaskEdi
     const [showInfo,setShowInfo] = useState(true)
     const [showObj,setShowObj] = useState(false)
     const [idShow,setIdShow] = useState('')
-
+    console.log('this is new branch')
     return (
         <div className="mainQuestList">
             <button className="showInfo" onClick={() => setShowInfo(!showInfo)}>
