@@ -63,7 +63,7 @@ const Lifequest = () => {
 
     setQuestList([...questList])
     const timeout = setTimeout(() => {
-      fetch(url, {
+      fetch(`${url}/${item._id}`, {
         method: 'PUT',
         headers: {
           'Accept': 'application/json',
@@ -84,7 +84,7 @@ const Lifequest = () => {
         questList.map((item) => {
           if (item._id === editId) {
             item.name = questTask
-            fetch(url, {
+            fetch(`${url}/${item._id}`, {
               method: 'PUT',
               headers: {
                 'Accept': 'application/json',
@@ -103,11 +103,18 @@ const Lifequest = () => {
       setIsEditing(false)
       setEditId(null)
     } else {
-      const newItem = { _id: new Date().getTime().toString(), name: questTask, type: e.target[2].value, completed: false, user_id: 'test1' }
+      const newItem = {
+        name: questTask, type: e.target[2].value, user_id: "6287d13b98054f262c33458b", completed: false, objectives: [{
+          "name": "funciona",
+          "completed": false
+        }]
+      }
       setQuestList([...questList, newItem])
       setQuestTask('')
+      console.log(newItem)
       fetch(url, {
         method: 'POST',
+        mode: 'cors',
         headers: {
           'Accept': 'application/json',
           'Content-type': 'application/json'
@@ -121,6 +128,27 @@ const Lifequest = () => {
 
   const handleSubmitObjective = (e) => {
     e.preventDefault()
+
+    questList.map((item) => {
+      if (item._id === edit) {
+
+        item.objectives = [...item.objectives, {
+          "name": objective,
+          "completed": false
+        }]
+        fetch(`${url}/${item._id}`, {
+          method: 'PUT',
+          headers: {
+            'Accept': 'application/json',
+            'Content-type': 'application/json'
+          },
+          body: JSON.stringify(item)
+
+        })
+          .then(res => res.json())
+        // setQuestList(questList)
+      }
+    })
     const newObjective = { id: new Date().getTime().toString(), title: objective, type: objective, idd: edit, completed: false }
     setObjectiveList([...objectiveList, newObjective])
     setObjective('')

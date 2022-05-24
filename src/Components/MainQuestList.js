@@ -13,11 +13,11 @@ const MainQuestList = ({mainQuestList,setQuestList,mainTaskCompleted,mainTaskEdi
             <button className="showInfo" onClick={() => setShowInfo(!showInfo)}>
                 <h3>Main Quests {showInfo ? "-" : "+"}</h3>
             </button>
-            {showInfo && mainQuestList.map((mainTask)=>{
+            {showInfo && mainQuestList.map((mainTask,index)=>{
                 if(mainTask.type === "M"){
                 return(
                     
-                    <div  tabIndex="1" key={mainTask._id} className="questbutton" onClick={()=> {
+                    <div  tabIndex="1" key={index} className="questbutton" onClick={()=> {
                         if (idShow === mainTask._id) {
                             setShowObj(true)
                             setIdShow(mainTask._id)
@@ -40,8 +40,8 @@ const MainQuestList = ({mainQuestList,setQuestList,mainTaskCompleted,mainTaskEdi
                                 idShow={idShow} setIdShow={setIdShow}
                                 mainQuestList={mainQuestList}
                                 setQuestList={setQuestList}
-                                // edit={edit}
-                                // setEdit={setEdit}
+                                edit={edit}
+                                setEdit={setEdit}
                             />}
                             <div className="buttonQuests">
                             <button type='submit' onClick={() => mainTaskEdited(mainTask._id)}>Edit</button>
