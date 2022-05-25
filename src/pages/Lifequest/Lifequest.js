@@ -5,6 +5,7 @@ import DailyQuest from '../../Components/DailyQuestComponents/DailyQuest'
 // import DailyData from './dailyQuestsData'
 import FormTask from "../../Components/FormTask";
 import CompletedTasks from "../../Components/CompletedTasks"
+import {GoogleLogin} from 'react-google-login'
 // import { LoginButton } from "../../Components/Login/Login";
 // import Profile from "../../Components/Login/Profile";
 // import { LogoutButton } from "../../Components/Login/LogOut";
@@ -157,6 +158,17 @@ const Lifequest = () => {
   return (
     <main>
       <div>
+        <GoogleLogin
+          clientId="GOOGLE ID"
+          render={(renderProps) => (
+            <button
+             onClick={renderProps.onClick} 
+             disabled={renderProps.disabled}
+            >
+              Google Sign in
+            </button>
+          )}
+        />
         {/* <Profile />
           <LogoutButton/>  */}
         <section className="header">
