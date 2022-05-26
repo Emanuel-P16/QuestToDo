@@ -34,7 +34,9 @@ const getLocalStorageObjective = () => {
 const Lifequest = () => {
   const [questTask, setQuestTask] = useState('');
   const [questList, setQuestList] = useState([])//getLocalStorage())
-  const state = useFetch(`https://questtodoapi.herokuapp.com/api/quests`)//getLocalStorage())
+  const [user,setUser] = useState(JSON.parse(localStorage.getItem('profile')))
+  const state = useFetch(`https://questtodoapi.herokuapp.com/api/quests`,user)//getLocalStorage())
+  
   const [isEditing, setIsEditing] = useState(false)
   const [editId, setEditId] = useState(null)
   // Objective hooks
@@ -45,11 +47,16 @@ const Lifequest = () => {
   // const {isAuthenticated} = useAuth0()
   const [url, setUrl] = useState('https://questtodoapi.herokuapp.com/api/quests')
   const isAuthenticated = true
+  
   useEffect(() => {
     // getDatabaseList()
 
     if (state.data) setQuestList(state.data.quests)
   }, [state.data])
+
+  useEffect(()=>{
+    setUser(user)
+  },[user])
 
   const TaskEdited = (id) => {
     const taskToEdit = questList.find((item) => item._id === id)
@@ -107,7 +114,7 @@ const Lifequest = () => {
       setEditId(null)
     } else {
       const newItem = {
-        name: questTask, type: e.target[2].value, user_id: "6287d13b98054f262c33458b", completed: false, objectives: [{
+        name: questTask, type: e.target[2].value, user_id: '628d186bcaf6514211939bb6' , google_id: user.google_id, completed: false, objectives: [{
           "name": "",
           "completed": false
         }]
@@ -158,15 +165,21 @@ const Lifequest = () => {
   }
 
   const googleSuccess = async (res) => {
-    console.log(res.credential)
+    // console.log(res)
     const result = jwt_decode(res.credential)
-    console.log(result)
+    // console.log(result)
+    const profile = {email: result.email, picture: result.picture,google_id: result.sub,user_id: ''}
+    console.log(profile)
+    localStorage.setItem('profile',JSON.stringify(profile))
+    setUser(profile.email)
+    // console.log(user)
   }
 
   const googleFailure = (error) => {
     console.log('Algo salio mal')
     console.log(error)
   }
+  // console.log(user)
   return (
     <main>
       <div>
@@ -174,20 +187,7 @@ const Lifequest = () => {
           onSuccess={googleSuccess}
           onError={googleFailure}
         />;
-        {/* <GoogleLogin
-          clientId="209381175810-g8but1s520412hhnvhu7v9ae5qngta2t.apps.googleusercontent.com"
-          render={(renderProps) => (
-            <button
-             onClick={renderProps.onClick} 
-             disabled={renderProps.disabled}
-            >
-              Google Sign in
-            </button>
-          )}
-          onSuccess={googleSuccess}
-          onFailure={googleFailure}
-          cookiePolicy="single_host_origin"
-        /> */}
+        
         {/* <Profile />
           <LogoutButton/>  */}
         <section className="header">
@@ -233,6 +233,9 @@ const Lifequest = () => {
       </div>
       {/* <Profile />
           <LogoutButton/> */}
+          <div>
+
+          </div>
     </main>
   );
 }
