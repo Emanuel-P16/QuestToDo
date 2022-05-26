@@ -5,7 +5,9 @@ import DailyQuest from '../../Components/DailyQuestComponents/DailyQuest'
 // import DailyData from './dailyQuestsData'
 import FormTask from "../../Components/FormTask";
 import CompletedTasks from "../../Components/CompletedTasks"
-import {GoogleLogin} from 'react-google-login'
+// import {GoogleLogin} from 'react-google-login'
+import { GoogleLogin } from '@react-oauth/google';
+import jwt_decode from 'jwt-decode'
 // import { LoginButton } from "../../Components/Login/Login";
 // import Profile from "../../Components/Login/Profile";
 // import { LogoutButton } from "../../Components/Login/LogOut";
@@ -155,11 +157,25 @@ const Lifequest = () => {
     setObjective('')
   }
 
+  const googleSuccess = async (res) => {
+    console.log(res.credential)
+    const result = jwt_decode(res.credential)
+    console.log(result)
+  }
+
+  const googleFailure = (error) => {
+    console.log('Algo salio mal')
+    console.log(error)
+  }
   return (
     <main>
       <div>
         <GoogleLogin
-          clientId="GOOGLE ID"
+          onSuccess={googleSuccess}
+          onError={googleFailure}
+        />;
+        {/* <GoogleLogin
+          clientId="209381175810-g8but1s520412hhnvhu7v9ae5qngta2t.apps.googleusercontent.com"
           render={(renderProps) => (
             <button
              onClick={renderProps.onClick} 
@@ -168,7 +184,10 @@ const Lifequest = () => {
               Google Sign in
             </button>
           )}
-        />
+          onSuccess={googleSuccess}
+          onFailure={googleFailure}
+          cookiePolicy="single_host_origin"
+        /> */}
         {/* <Profile />
           <LogoutButton/>  */}
         <section className="header">
