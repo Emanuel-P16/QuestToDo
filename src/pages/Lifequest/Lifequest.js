@@ -6,8 +6,8 @@ import DailyQuest from '../../Components/DailyQuestComponents/DailyQuest'
 import FormTask from "../../Components/FormTask";
 import CompletedTasks from "../../Components/CompletedTasks"
 // import {GoogleLogin} from 'react-google-login'
-import { GoogleLogin } from '@react-oauth/google';
-import jwt_decode from 'jwt-decode'
+// import { GoogleLogin } from '@react-oauth/google';
+// import jwt_decode from 'jwt-decode'
 import {useNavigate} from 'react-router-dom'
 // import { LoginButton } from "../../Components/Login/Login";
 // import Profile from "../../Components/Login/Profile";
@@ -169,36 +169,36 @@ const Lifequest = () => {
     setObjective('')
   }
 
-  const googleSuccess = async (res) => {
-    // console.log(res)
-    const result = jwt_decode(res.credential)
-    // console.log(result)
-    const profile = {email: result.email, picture: result.picture,google_id: result.sub,user_id: ''}
-    localStorage.setItem('profile',JSON.stringify(profile))
-    setUser(profile.email)
-    window.location.reload();
-    // console.log(user)
-  }
+  // const googleSuccess = async (res) => {
+  //   // console.log(res)
+  //   const result = jwt_decode(res.credential)
+  //   // console.log(result)
+  //   const profile = {email: result.email, picture: result.picture,google_id: result.sub,user_id: ''}
+  //   localStorage.setItem('profile',JSON.stringify(profile))
+  //   setUser(profile.email)
+  //   window.location.reload();
+  //   // console.log(user)
+  // }
 
-  const googleFailure = (error) => {
-    console.log('Algo salio mal')
-    console.log(error)
-  }
-  const logout = () => {
-    localStorage.clear()
-    window.location.reload()
-  }
+  // const googleFailure = (error) => {
+  //   console.log('Algo salio mal')
+  //   console.log(error)
+  // }
+  // const logout = () => {
+  //   localStorage.clear()
+  //   window.location.reload()
+  // }
   // console.log(user)
   return (
     <main>
       <div>
-        <GoogleLogin
+        {/* <GoogleLogin
           onSuccess={googleSuccess}
           onError={googleFailure}
-        />;
-        <button onClick={logout}>
+        />; */}
+        {/* <button onClick={logout}>
           Logout
-        </button>
+        </button> */}
         {/* <Profile />
           <LogoutButton/>  */}
         <section className="header">
