@@ -16,7 +16,7 @@ export const NavBarSeparatorStyle = styled.div`
   display:flex;
   align-items:center;
   width:100%;
-  height: 3rem;
+  height: 100%;
   justify-content: space-between  ;
   margin: 0 1rem;
 `;
@@ -31,12 +31,14 @@ export const NavBarUserImgStyle = styled.img`
 display:flex;
 align-items:center;
 justify-content:center;
-height: 3rem;
+height: 100%;
+border-radius: .25rem;
 `;
 
 export const NavbarButtonStyle = styled.button`
 border:none;
 border-radius: 0;
 width: 4rem;
-height: 3rem;
+height: 100%;
+border-radius: .25rem;
 `;

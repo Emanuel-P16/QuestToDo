@@ -19,7 +19,8 @@ const ObjectiveList = ({objectiveList,setObjectiveList,mainTask,mainQuestList,se
             if(object._id === x._id){
                 setQuestList([...mainQuestList])
                     
-            }})
+            }return null
+        })
       
     } 
    

@@ -8,21 +8,21 @@ import CompletedTasks from "../../Components/CompletedTasks"
 // import {GoogleLogin} from 'react-google-login'
 // import { GoogleLogin } from '@react-oauth/google';
 // import jwt_decode from 'jwt-decode'
-import {useNavigate} from 'react-router-dom'
+// import {useNavigate} from 'react-router-dom'
 // import { LoginButton } from "../../Components/Login/Login";
 // import Profile from "../../Components/Login/Profile";
 // import { LogoutButton } from "../../Components/Login/LogOut";
 // import { useAuth0 } from "@auth0/auth0-react";
 // import Pomodoro from "../../Components/Pomodoro/Pomodoro";
 import useFetch from "../../hooks/useFetch";
-const getLocalStorageCompleted = () => {
-  let completedList = localStorage.getItem('CompletedList')
-  if (completedList) {
-    return (completedList = JSON.parse(localStorage.getItem('CompletedList')))
-  } else {
-    return []
-  }
-}
+// const getLocalStorageCompleted = () => {
+//   let completedList = localStorage.getItem('CompletedList')
+//   if (completedList) {
+//     return (completedList = JSON.parse(localStorage.getItem('CompletedList')))
+//   } else {
+//     return []
+//   }
+// }
 const getLocalStorageObjective = () => {
   let objectiveList = localStorage.getItem('ObjectiveList')
   if (objectiveList) {
@@ -33,10 +33,11 @@ const getLocalStorageObjective = () => {
 }
 
 const Lifequest = () => {
+  const [url, setUrl] = useState('https://questtodoapi.herokuapp.com/api/quests')
   const [questTask, setQuestTask] = useState('');
   const [questList, setQuestList] = useState([])//getLocalStorage())
   const [user,setUser] = useState(JSON.parse(localStorage.getItem('profile')))
-  const state = useFetch(`https://questtodoapi.herokuapp.com/api/quests`,user)//getLocalStorage())
+  const state = useFetch(`${url}`,user)//getLocalStorage())
   
   const [isEditing, setIsEditing] = useState(false)
   const [editId, setEditId] = useState(null)
@@ -46,17 +47,13 @@ const Lifequest = () => {
   const [edit, setEdit] = useState('')
   // useAuth0
   // const {isAuthenticated} = useAuth0()
-  const [url, setUrl] = useState('https://questtodoapi.herokuapp.com/api/quests')
-  const isAuthenticated = true
-  const navigate = useNavigate()
+  // const isAuthenticated = true
+  // const navigate = useNavigate()
 
   
   useEffect(() => {
     // getDatabaseList()
-
     if (state.data) {setQuestList(state.data)} else { setQuestList([])}
-    console.log(state.data)
-    console.log(questList)
   }, [state.data])
 
   useEffect(()=>{
@@ -126,7 +123,7 @@ const Lifequest = () => {
       }
       setQuestList([...questList, newItem])
       setQuestTask('')
-      console.log(newItem)
+      
       fetch(url, {
         method: 'POST',
         mode: 'cors',
@@ -162,45 +159,16 @@ const Lifequest = () => {
         })
           .then(res => res.json())
         // setQuestList(questList)
-      }
+      } return null
     })
     const newObjective = { id: new Date().getTime().toString(), title: objective, type: objective, idd: edit, completed: false }
     setObjectiveList([...objectiveList, newObjective])
     setObjective('')
   }
 
-  // const googleSuccess = async (res) => {
-  //   // console.log(res)
-  //   const result = jwt_decode(res.credential)
-  //   // console.log(result)
-  //   const profile = {email: result.email, picture: result.picture,google_id: result.sub,user_id: ''}
-  //   localStorage.setItem('profile',JSON.stringify(profile))
-  //   setUser(profile.email)
-  //   window.location.reload();
-  //   // console.log(user)
-  // }
-
-  // const googleFailure = (error) => {
-  //   console.log('Algo salio mal')
-  //   console.log(error)
-  // }
-  // const logout = () => {
-  //   localStorage.clear()
-  //   window.location.reload()
-  // }
-  // console.log(user)
   return (
     <main>
       <div>
-        {/* <GoogleLogin
-          onSuccess={googleSuccess}
-          onError={googleFailure}
-        />; */}
-        {/* <button onClick={logout}>
-          Logout
-        </button> */}
-        {/* <Profile />
-          <LogoutButton/>  */}
         <section className="header">
           <FormTask
             handleSubmit={handleSubmit}

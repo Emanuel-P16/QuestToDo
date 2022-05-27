@@ -23,13 +23,13 @@ const useFetch = (url, user) => {
         if(userQuest){
   
           if(userQuest === null ) {
-            console.log('null') 
+            
              userQuest = [{ name: '', type:'', user_id: '' , google_id: '', completed: true, objectives: [{
               "name": "",
               "completed": true
             }]}]
           }
-          console.log(userQuest)
+        
           setState({
             loading: false,
             error: null,

@@ -14,7 +14,9 @@ const CompletedTasks = ({completedTasks,setCompletedTasks}) => {
                   <article key={index}>
                     <p className="completed">{task.name}</p>
                   </article> )
-            }})
+            }
+            return null
+          })
             
         }
       </div>

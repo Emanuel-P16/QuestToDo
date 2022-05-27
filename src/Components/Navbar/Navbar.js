@@ -30,7 +30,7 @@ const Navbar = () => {
     }, [location])
 
 
-    {
+    
         if (user) {
             return (<NavbarStyle>
                 <NavBarSeparatorStyle>
@@ -47,14 +47,17 @@ const Navbar = () => {
         } else {
             return (
                 <NavbarStyle>
+                    <NavBarSeparatorStyle>
+                    <h2>Lifequest</h2>
                     <GoogleLogin
                         onSuccess={googleSuccess}
                         onError={googleFailure}
                     />
+                    </NavBarSeparatorStyle>
                 </NavbarStyle>
             )
         }
-    }
+    
 
 
 }
