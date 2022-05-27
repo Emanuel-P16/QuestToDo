@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { useLocation } from "react-router-dom"
+import { NavbarStyle, NavbarButtonStyle, NavBarSeparatorStyle,NavBarUserDivStyle,NavBarUserImgStyle} from "../../styled-components";
 import jwt_decode from 'jwt-decode'
 import { GoogleLogin } from '@react-oauth/google';
 
@@ -31,21 +32,26 @@ const Navbar = () => {
 
     {
         if (user) {
-            return (<div>
-                <img src={user.picture} alt="Img not found" />
-                <button onClick={logout}>
-                    Logout
-                </button>
-            </div>
+            return (<NavbarStyle>
+                <NavBarSeparatorStyle>
+                    <h2>Lifequest</h2>
+                    <NavBarUserDivStyle>
+                        <NavBarUserImgStyle src={user.picture} alt="Img not found" />
+                        <NavbarButtonStyle onClick={logout}>
+                            Logout
+                        </NavbarButtonStyle>
+                    </NavBarUserDivStyle>
+                </NavBarSeparatorStyle>
+            </NavbarStyle>
             )
         } else {
             return (
-                <div>
+                <NavbarStyle>
                     <GoogleLogin
                         onSuccess={googleSuccess}
                         onError={googleFailure}
                     />
-                </div>
+                </NavbarStyle>
             )
         }
     }
