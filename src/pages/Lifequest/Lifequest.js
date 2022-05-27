@@ -8,6 +8,7 @@ import CompletedTasks from "../../Components/CompletedTasks"
 // import {GoogleLogin} from 'react-google-login'
 import { GoogleLogin } from '@react-oauth/google';
 import jwt_decode from 'jwt-decode'
+import {useNavigate} from 'react-router-dom'
 // import { LoginButton } from "../../Components/Login/Login";
 // import Profile from "../../Components/Login/Profile";
 // import { LogoutButton } from "../../Components/Login/LogOut";
@@ -47,11 +48,15 @@ const Lifequest = () => {
   // const {isAuthenticated} = useAuth0()
   const [url, setUrl] = useState('https://questtodoapi.herokuapp.com/api/quests')
   const isAuthenticated = true
+  const navigate = useNavigate()
+
   
   useEffect(() => {
     // getDatabaseList()
 
-    if (state.data) setQuestList(state.data.quests)
+    if (state.data) {setQuestList(state.data)} else { setQuestList([])}
+    console.log(state.data)
+    console.log(questList)
   }, [state.data])
 
   useEffect(()=>{
@@ -169,15 +174,19 @@ const Lifequest = () => {
     const result = jwt_decode(res.credential)
     // console.log(result)
     const profile = {email: result.email, picture: result.picture,google_id: result.sub,user_id: ''}
-    console.log(profile)
     localStorage.setItem('profile',JSON.stringify(profile))
     setUser(profile.email)
+    window.location.reload();
     // console.log(user)
   }
 
   const googleFailure = (error) => {
     console.log('Algo salio mal')
     console.log(error)
+  }
+  const logout = () => {
+    localStorage.clear()
+    window.location.reload()
   }
   // console.log(user)
   return (
@@ -187,7 +196,9 @@ const Lifequest = () => {
           onSuccess={googleSuccess}
           onError={googleFailure}
         />;
-        
+        <button onClick={logout}>
+          Logout
+        </button>
         {/* <Profile />
           <LogoutButton/>  */}
         <section className="header">
@@ -201,6 +212,7 @@ const Lifequest = () => {
         </section>
         <div className="grid">
           <section className="questContainer">
+           
             <MainQuestList
               mainQuestList={questList}
               setQuestList={setQuestList}
