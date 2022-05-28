@@ -2,7 +2,6 @@ import FormObjective from './FormObjective'
 import ObjectiveList from './ObjectiveList'
 
 const Objectives = ({objective,setObjective,objectiveList,setObjectiveList,handleSubmitObjective,mainTask,edit,setEdit,idShow,setIdShow,mainQuestList,setQuestList}) => {
-  
     if (idShow === mainTask){
         return (
         

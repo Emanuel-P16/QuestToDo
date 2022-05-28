@@ -24,8 +24,8 @@ const ObjectiveList = ({objectiveList,setObjectiveList,mainTask,mainQuestList,se
       
     } 
    
-
         return (
+            
             mainQuestList.map((x)=>{
                 if(mainTask === x._id){
                     return (x.objectives.map((obj,index) =>{

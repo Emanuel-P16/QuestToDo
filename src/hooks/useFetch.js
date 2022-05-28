@@ -14,21 +14,23 @@ const useFetch = (url, user) => {
         
           if (x.google_id === user.google_id) {
             return x
-          } else return [{ name: '', type:'', user_id: '' , google_id: '', completed: true, objectives: [{
-            "name": "",
-            "completed": true
-          }]}]
+          } 
+          // else return { name: '', type:'', user_id: '' , google_id: '', completed: true, objectives: [{
+          //   "name": "",
+          //   "completed": true
+          // }]}
+          
         })
 
         if(userQuest){
-  
-          if(userQuest === null ) {
+              userQuest = userQuest.filter(quest => quest !== undefined)
+          // if(userQuest === null ) {
             
-             userQuest = [{ name: '', type:'', user_id: '' , google_id: '', completed: true, objectives: [{
-              "name": "",
-              "completed": true
-            }]}]
-          }
+          //    userQuest = [{ name: '', type:'', user_id: '' , google_id: '', completed: true, objectives: [{
+          //     "name": "",
+          //     "completed": true
+          //   }]}]
+          // }
         
           setState({
             loading: false,

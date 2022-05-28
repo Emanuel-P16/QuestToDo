@@ -69,27 +69,34 @@ const Lifequest = () => {
   }
   // factorizacion de las listas para que sea solo una funcion para todas las listas
 
-  const taskCompleted = (id) => {
-    console.log(id)
-    const item = questList.find((item) => item.google_id === id)
-    console.log(item)
+  const taskCompleted = async(id) => {
+    
+    const item = questList.find((item) => item._id === id)
+  
     item.completed = (!item.completed)
     item.type = "C"
-    setQuestList([...questList])
-
     
-    const timeout = setTimeout(() => {
-      fetch(`${url}/${item.user_id}`, {
-        method: 'PUT',
-        headers: {
-          'Accept': 'application/json',
-          'Content-type': 'application/json',
-        },
-        body: JSON.stringify(item)
-      })
-        .then(res => res.json())
-    }, 3000);
-    return () => clearTimeout(timeout)
+    // const timeout = setTimeout(() => {
+    //   fetch(`${url}/${item._id}`, {
+    //     method: 'PUT',
+    //     headers: {
+    //       'Accept': 'application/json',
+    //       'Content-type': 'application/json',
+    //     },
+    //     body: JSON.stringify(item)
+    //   })
+    //     .then(res => res.json())
+    // }, 3000);
+    // return () => clearTimeout(timeout)
+    await fetch(`${url}/${item._id}`, {
+          method: 'PUT',
+          headers: {
+            'Accept': 'application/json',
+            'Content-type': 'application/json',
+          },
+          body: JSON.stringify(item)
+        })
+          .then(res => res.json())
   }
   const handleSubmit = async(e) => {
 
@@ -139,7 +146,7 @@ const Lifequest = () => {
         .then(res => res.json())
         setQuestList([...questList, newItem])
         setQuestTask('')
-        console.log(newItem)
+        console.log(questList)
         
     }
   }
@@ -171,7 +178,7 @@ const Lifequest = () => {
     setObjectiveList([...objectiveList, newObjective])
     setObjective('')
   }
-
+  console.log(questList)
   return (
     <main>
       <div>
