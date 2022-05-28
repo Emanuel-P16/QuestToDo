@@ -15,14 +15,15 @@ const MainQuestList = ({mainQuestList,setQuestList,mainTaskCompleted,mainTaskEdi
             </button>
             {showInfo && mainQuestList.map((mainTask,index)=>{
                 if(mainTask.type === "M"){
+                    
                 return(
                     
                     <div  tabIndex="1" key={index} className="questbutton" onClick={()=> {
-                        if (idShow === mainTask._id) {
+                        if (idShow === mainTask.google_id) {
                             setShowObj(true)
-                            setIdShow(mainTask._id)
+                            setIdShow(mainTask.google_id)
                         } else {         
-                            setIdShow(mainTask._id)
+                            setIdShow(mainTask.google_id)
                             setShowObj(true)
                         }
                     }}>
@@ -45,7 +46,7 @@ const MainQuestList = ({mainQuestList,setQuestList,mainTaskCompleted,mainTaskEdi
                             />}
                             <div className="buttonQuests">
                             <button type='submit' onClick={() => mainTaskEdited(mainTask._id)}>Edit</button>
-                            <button type='submit' onClick={() => mainTaskCompleted(mainTask._id)}>Completed</button>
+                            <button type='submit' onClick={() => mainTaskCompleted(mainTask.google_id)}>Completed</button>
                             </div>
                         </article>
                     </div>

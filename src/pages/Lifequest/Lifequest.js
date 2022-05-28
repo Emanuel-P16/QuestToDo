@@ -61,6 +61,7 @@ const Lifequest = () => {
   },[user])
 
   const TaskEdited = (id) => {
+    console.log(id)
     const taskToEdit = questList.find((item) => item._id === id)
     setIsEditing(true);
     setEditId(id)
@@ -69,13 +70,16 @@ const Lifequest = () => {
   // factorizacion de las listas para que sea solo una funcion para todas las listas
 
   const taskCompleted = (id) => {
-    const item = questList.find((item) => item._id === id)
+    console.log(id)
+    const item = questList.find((item) => item.google_id === id)
+    console.log(item)
     item.completed = (!item.completed)
     item.type = "C"
-
     setQuestList([...questList])
+
+    
     const timeout = setTimeout(() => {
-      fetch(`${url}/${item._id}`, {
+      fetch(`${url}/${item.user_id}`, {
         method: 'PUT',
         headers: {
           'Accept': 'application/json',
@@ -87,7 +91,7 @@ const Lifequest = () => {
     }, 3000);
     return () => clearTimeout(timeout)
   }
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
 
     e.preventDefault()
     if (!questTask) {
@@ -96,7 +100,7 @@ const Lifequest = () => {
         questList.map((item) => {
           if (item._id === editId) {
             item.name = questTask
-            fetch(`${url}/${item._id}`, {
+             fetch(`${url}/${item._id}`, {
               method: 'PUT',
               headers: {
                 'Accept': 'application/json',
@@ -121,10 +125,8 @@ const Lifequest = () => {
           "completed": false
         }]
       }
-      setQuestList([...questList, newItem])
-      setQuestTask('')
-      
-      fetch(url, {
+     
+        await fetch(url, {
         method: 'POST',
         mode: 'cors',
         headers: {
@@ -135,6 +137,10 @@ const Lifequest = () => {
 
       })
         .then(res => res.json())
+        setQuestList([...questList, newItem])
+        setQuestTask('')
+        console.log(newItem)
+        
     }
   }
 
