@@ -16,6 +16,7 @@ import CompletedTasks from "../../Components/CompletedTasks"
 // import Pomodoro from "../../Components/Pomodoro/Pomodoro";
 import useFetch from "../../hooks/useFetch";
 // const getLocalStorageCompleted = () => {
+  import { ObjectID } from 'bson';
 //   let completedList = localStorage.getItem('CompletedList')
 //   if (completedList) {
 //     return (completedList = JSON.parse(localStorage.getItem('CompletedList')))
@@ -60,6 +61,7 @@ const Lifequest = () => {
     setUser(user)
   },[user])
 
+
   const TaskEdited = (id) => {
     console.log(id)
     const taskToEdit = questList.find((item) => item._id === id)
@@ -70,12 +72,11 @@ const Lifequest = () => {
   // factorizacion de las listas para que sea solo una funcion para todas las listas
 
   const taskCompleted = async(id) => {
-    
+      if (id === undefined) return null
     const item = questList.find((item) => item._id === id)
   
     item.completed = (!item.completed)
     item.type = "C"
-    
     // const timeout = setTimeout(() => {
     //   fetch(`${url}/${item._id}`, {
     //     method: 'PUT',
@@ -127,7 +128,7 @@ const Lifequest = () => {
       setEditId(null)
     } else {
       const newItem = {
-        name: questTask, type: e.target[2].value, user_id: '628d186bcaf6514211939bb6' , google_id: user.google_id, completed: false, objectives: [{
+      _id: new ObjectID(),name:questTask, type: e.target[2].value, user_id: '628d186bcaf6514211939bb6' , google_id: user.google_id, completed: false, objectives: [{
           "name": "",
           "completed": false
         }]
