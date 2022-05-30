@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import MainQuestList from "../../Components/MainQuestList"
+import MainQuestList from "../../Components/Mainquest/MainQuestList"
 import SideQuestList from "../../Components/SideQuestList";
 import DailyQuest from '../../Components/DailyQuestComponents/DailyQuest'
 // import DailyData from './dailyQuestsData'
 import FormTask from "../../Components/FormTask";
 import CompletedTasks from "../../Components/CompletedTasks"
+import { LayoutMainStyle, LayoutSectionStyle, LayoutGridStyle, LayoutQuestContainer } from "../../styled-components/layout.styled.component";
 // import {GoogleLogin} from 'react-google-login'
 // import { GoogleLogin } from '@react-oauth/google';
 // import jwt_decode from 'jwt-decode'
@@ -16,7 +17,7 @@ import CompletedTasks from "../../Components/CompletedTasks"
 // import Pomodoro from "../../Components/Pomodoro/Pomodoro";
 import useFetch from "../../hooks/useFetch";
 // const getLocalStorageCompleted = () => {
-  import { ObjectID } from 'bson';
+import { ObjectID } from 'bson';
 //   let completedList = localStorage.getItem('CompletedList')
 //   if (completedList) {
 //     return (completedList = JSON.parse(localStorage.getItem('CompletedList')))
@@ -37,9 +38,9 @@ const Lifequest = () => {
   const [url, setUrl] = useState('https://questtodoapi.herokuapp.com/api/quests')
   const [questTask, setQuestTask] = useState('');
   const [questList, setQuestList] = useState([])//getLocalStorage())
-  const [user,setUser] = useState(JSON.parse(localStorage.getItem('profile')))
-  const state = useFetch(`${url}`,user)//getLocalStorage())
-  
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')))
+  const state = useFetch(`${url}`, user)//getLocalStorage())
+
   const [isEditing, setIsEditing] = useState(false)
   const [editId, setEditId] = useState(null)
   // Objective hooks
@@ -51,15 +52,15 @@ const Lifequest = () => {
   // const isAuthenticated = true
   // const navigate = useNavigate()
 
-  
+
   useEffect(() => {
     // getDatabaseList()
-    if (state.data) {setQuestList(state.data)} else { setQuestList([])}
+    if (state.data) { setQuestList(state.data) } else { setQuestList([]) }
   }, [state.data])
 
-  useEffect(()=>{
+  useEffect(() => {
     setUser(user)
-  },[user])
+  }, [user])
 
 
   const TaskEdited = (id) => {
@@ -71,10 +72,10 @@ const Lifequest = () => {
   }
   // factorizacion de las listas para que sea solo una funcion para todas las listas
 
-  const taskCompleted = async(id) => {
-      if (id === undefined) return null
+  const taskCompleted = async (id) => {
+    if (id === undefined) return null
     const item = questList.find((item) => item._id === id)
-  
+
     item.completed = (!item.completed)
     item.type = "C"
     // const timeout = setTimeout(() => {
@@ -90,16 +91,16 @@ const Lifequest = () => {
     // }, 3000);
     // return () => clearTimeout(timeout)
     await fetch(`${url}/${item._id}`, {
-          method: 'PUT',
-          headers: {
-            'Accept': 'application/json',
-            'Content-type': 'application/json',
-          },
-          body: JSON.stringify(item)
-        })
-          .then(res => res.json())
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify(item)
+    })
+      .then(res => res.json())
   }
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
 
     e.preventDefault()
     if (!questTask) {
@@ -108,7 +109,7 @@ const Lifequest = () => {
         questList.map((item) => {
           if (item._id === editId) {
             item.name = questTask
-             fetch(`${url}/${item._id}`, {
+            fetch(`${url}/${item._id}`, {
               method: 'PUT',
               headers: {
                 'Accept': 'application/json',
@@ -128,13 +129,13 @@ const Lifequest = () => {
       setEditId(null)
     } else {
       const newItem = {
-      _id: new ObjectID(),name:questTask, type: e.target[2].value, user_id: '628d186bcaf6514211939bb6' , google_id: user.google_id, completed: false, objectives: [{
+        _id: new ObjectID(), name: questTask, type: e.target[2].value, user_id: '628d186bcaf6514211939bb6', google_id: user.google_id, completed: false, objectives: [{
           "name": "",
           "completed": false
         }]
       }
-     
-        await fetch(url, {
+
+      await fetch(url, {
         method: 'POST',
         mode: 'cors',
         headers: {
@@ -145,10 +146,10 @@ const Lifequest = () => {
 
       })
         .then(res => res.json())
-        setQuestList([...questList, newItem])
-        setQuestTask('')
-        console.log(questList)
-        
+      setQuestList([...questList, newItem])
+      setQuestTask('')
+      console.log(questList)
+
     }
   }
 
@@ -181,56 +182,44 @@ const Lifequest = () => {
   }
   console.log(questList)
   return (
-    <main>
-      <div>
-        <section className="header">
-          <FormTask
-            handleSubmit={handleSubmit}
-            questTask={questTask}
-            setQuestTask={setQuestTask}
+    <LayoutMainStyle>
+      <LayoutSectionStyle>
+        <FormTask
+          handleSubmit={handleSubmit}
+          questTask={questTask}
+          setQuestTask={setQuestTask}
+        />
+        {/* <div className="level">
+          </div> */}
+      </LayoutSectionStyle>
+      <LayoutGridStyle>
+        <LayoutQuestContainer>
+          <MainQuestList
+            mainQuestList={questList}
+            setQuestList={setQuestList}
+            mainTaskCompleted={taskCompleted}
+            mainTaskEdited={TaskEdited}
+            objective={objective} setObjective={setObjective}
+            objectiveList={objectiveList} setObjectiveList={setObjectiveList}
+            handleSubmitObjective={handleSubmitObjective}
+            edit={edit}
+            setEdit={setEdit}
           />
-          <div className="level">
-          </div>
-        </section>
-        <div className="grid">
-          <section className="questContainer">
-           
-            <MainQuestList
-              mainQuestList={questList}
-              setQuestList={setQuestList}
-              mainTaskCompleted={taskCompleted}
-              mainTaskEdited={TaskEdited}
-              objective={objective} setObjective={setObjective}
-              objectiveList={objectiveList} setObjectiveList={setObjectiveList}
-              handleSubmitObjective={handleSubmitObjective}
-              edit={edit}
-              setEdit={setEdit}
-            />
-            <SideQuestList sideQuestList={questList}
-              sideTaskCompleted={taskCompleted}
-              sideTaskEdited={TaskEdited}
-            />
-
-            <DailyQuest
-              dailyQuestList={questList} setDailyQuestList={setQuestList}
-              dailyTaskCompleted={taskCompleted}
-            />
-            <CompletedTasks
-              completedTasks={questList}
-            //  setCompletedTasks={}
-            />
-          </section>
-          {/* <section>
-                <Pomodoro />
-              </section> */}
-        </div>
-      </div>
-      {/* <Profile />
-          <LogoutButton/> */}
-          <div>
-
-          </div>
-    </main>
+          <SideQuestList sideQuestList={questList}
+            sideTaskCompleted={taskCompleted}
+            sideTaskEdited={TaskEdited}
+          />
+          {/* <DailyQuest
+            dailyQuestList={questList} setDailyQuestList={setQuestList}
+            dailyTaskCompleted={taskCompleted}
+          /> */}
+          <CompletedTasks
+            completedTasks={questList}
+          //  setCompletedTasks={}
+          />
+        </LayoutQuestContainer>
+      </LayoutGridStyle>
+    </LayoutMainStyle>
   );
 }
 

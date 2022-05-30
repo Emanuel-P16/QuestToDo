@@ -165,7 +165,7 @@ p{
 
 .mainQuestList{
   border: var(--clr-grey-1) solid 1px;
-  margin-bottom: 0.25rem;
+  margin-bottom: 1rem;
 }
 
 .grid{
