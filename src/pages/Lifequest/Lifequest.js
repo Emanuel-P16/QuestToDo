@@ -282,7 +282,7 @@ const Lifequest = () => {
                       </article>
                     </div>
                   )
-                }
+                } return null
               })}
             {/* // <Objectives
                                     //     objective={objective} setObjective={setObjective}

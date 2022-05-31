@@ -2,6 +2,7 @@ import { useState } from "react"
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 // import { faExclamation } from "@fortawesome/free-solid-svg-icons"
 import Objectives from '../Objectives'
+import { QuestButtonExpandLayout, Questcontainer, QuestLayout } from "./styled-components/mainquest.styled.components"
 
 export const MainQuestList = ({ mainQuestList, setQuestList, mainTaskCompleted, mainTaskEdited, objective, setObjective, objectiveList, setObjectiveList, handleSubmitObjective, edit, setEdit, showInfo, setShowInfo, showObj,
     setShowObj,
@@ -9,17 +10,17 @@ export const MainQuestList = ({ mainQuestList, setQuestList, mainTaskCompleted, 
     setIdShow,
     Mobile
 }) => {
-
+    // </QuestLayout>
     // console.log('this is new branch')
     return (
-        <div className="mainQuestList">
-            <button className="showInfo" onClick={() => setShowInfo(!showInfo)}>
+        <QuestLayout>
+            <QuestButtonExpandLayout  onClick={() => setShowInfo(!showInfo)}>
                 <h3>Main Quests {showInfo ? "-" : "+"}</h3>
-            </button>
+            </QuestButtonExpandLayout>
             {showInfo && mainQuestList.map((mainTask, index) => {
                 if (mainTask.type === "M") {
                     return (
-                        <div tabIndex="1" key={index} className="questbutton" onClick={() => {
+                        <Questcontainer tabIndex="1" key={index} onClick={() => {
                             if (idShow === mainTask._id) {
                                 setShowObj(true)
                                 setIdShow(mainTask._id)
@@ -50,11 +51,11 @@ export const MainQuestList = ({ mainQuestList, setQuestList, mainTaskCompleted, 
                                     <button type='submit' onClick={() => mainTaskCompleted(mainTask._id)}>Completed</button>
                                 </div>
                             </article>
-                        </div>
+                        </Questcontainer>
                     )
                 } else { return null }
             })}
-        </div>
+        </QuestLayout>
     )
 }
 

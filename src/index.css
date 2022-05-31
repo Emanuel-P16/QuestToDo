@@ -101,6 +101,7 @@ p{
 .questbutton{
   /* height: 100%; */
   width: 95%;
+  margin-top: 1rem;
   margin-left: 0.5rem;
   margin-right: 10rem;
   background-color: transparent;
@@ -164,7 +165,7 @@ p{
 
 
 .mainQuestList{
-  border: var(--clr-grey-1) solid 1px;
+  /* border: var(--clr-grey-1) solid 1px; */
   margin-bottom: 1rem;
 }
 
