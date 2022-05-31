@@ -18,6 +18,7 @@ import { LayoutMainStyle, LayoutSectionStyle, LayoutGridStyle, LayoutQuestContai
 import useFetch from "../../hooks/useFetch";
 // const getLocalStorageCompleted = () => {
 import { ObjectID } from 'bson';
+import Objectives from "../../Components/Objectives";
 //   let completedList = localStorage.getItem('CompletedList')
 //   if (completedList) {
 //     return (completedList = JSON.parse(localStorage.getItem('CompletedList')))
@@ -51,15 +52,22 @@ const Lifequest = () => {
   // const {isAuthenticated} = useAuth0()
   // const isAuthenticated = true
   // const navigate = useNavigate()
+  //// mainquest useSTATES
+  const [showInfo, setShowInfo] = useState(true)
+  const [showObj, setShowObj] = useState(false)
+  const [idShow, setIdShow] = useState('')
+  const [Mobile, setMobiles] = useState(false)
 
 
   useEffect(() => {
     // getDatabaseList()
     if (state.data) { setQuestList(state.data) } else { setQuestList([]) }
+    isMobile()
   }, [state.data])
 
   useEffect(() => {
     setUser(user)
+
   }, [user])
 
 
@@ -180,7 +188,17 @@ const Lifequest = () => {
     setObjectiveList([...objectiveList, newObjective])
     setObjective('')
   }
-  console.log(questList)
+
+  const isMobile = () => {
+
+    var isMobiles = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    if (isMobiles) {
+      setMobiles(true)
+      return true
+    }
+    setMobiles(false)
+    return false
+  }
   return (
     <LayoutMainStyle>
       <LayoutSectionStyle>
@@ -204,7 +222,18 @@ const Lifequest = () => {
             handleSubmitObjective={handleSubmitObjective}
             edit={edit}
             setEdit={setEdit}
+            showInfo={showInfo}
+            setShowInfo={setShowInfo}
+            showObj={showObj}
+            setShowObj={setShowObj}
+            idShow={idShow}
+            setIdShow={setIdShow}
+            Mobile={Mobile}
           />
+          {/* const [showInfo, setShowInfo] = useState(true)
+  const [showObj, setShowObj] = useState(false)
+  const [idShow, setIdShow] = useState('') */}
+
           <SideQuestList sideQuestList={questList}
             sideTaskCompleted={taskCompleted}
             sideTaskEdited={TaskEdited}
@@ -218,6 +247,55 @@ const Lifequest = () => {
           //  setCompletedTasks={}
           />
         </LayoutQuestContainer>
+        {showObj && !Mobile &&
+          <LayoutQuestContainer>
+            {showObj && !Mobile &&
+              questList.map((mainTask, index) => {
+                if (mainTask.type === "M") {
+                  return (
+                    <div tabIndex="1" key={index} className="questbutton" onClick={() => {
+                      if (idShow === mainTask._id) {
+                        setShowObj(true)
+                        setIdShow(mainTask._id)
+                      } else {
+                        setIdShow(mainTask._id)
+                        setShowObj(true)
+                      }
+                    }}>
+                      <article className="quest">
+                        {/* <div className="titleQuests">
+                          <p className={mainTask.completed ? 'completed' : null}>{mainTask.name}</p>
+                      </div> */}
+                        {showObj &&
+                          <Objectives
+                            objective={objective} setObjective={setObjective}
+                            objectiveList={objectiveList} setObjectiveList={setObjectiveList}
+                            handleSubmitObjective={handleSubmitObjective}
+                            mainTask={mainTask._id}
+                            idShow={idShow} setIdShow={setIdShow}
+                            mainQuestList={questList}
+                            setQuestList={setQuestList}
+                            edit={edit}
+                            setEdit={setEdit}
+                          />}
+
+                      </article>
+                    </div>
+                  )
+                }
+              })}
+            {/* // <Objectives
+                                    //     objective={objective} setObjective={setObjective}
+                                    //     objectiveList={objectiveList} setObjectiveList={setObjectiveList}
+                                    //     handleSubmitObjective={handleSubmitObjective}
+                                    //     mainTask={mainTask._id}
+                                    //     idShow={idShow} setIdShow={setIdShow}
+                                    //     mainQuestList={questList}
+                                    //     setQuestList={setQuestList}
+                                    //     edit={edit}
+                                    //     setEdit={setEdit}
+                                    // />} */}
+          </LayoutQuestContainer>}
       </LayoutGridStyle>
     </LayoutMainStyle>
   );

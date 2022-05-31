@@ -23,10 +23,12 @@ export const LayoutGridStyle = styled.div`
     width:100%;
     @media only screen and (min-width: 1200px) {
        display: grid;
-      grid-template-columns: 1fr 1fr;   
+      grid-template-columns: 1fr 1fr;
+      margin-top: 2rem;   
     }
 `;
 
 export const LayoutQuestContainer = styled.section`
-  margin: 2rem;
+  margin: 0rem 2rem;
+  height: 100%;
 `

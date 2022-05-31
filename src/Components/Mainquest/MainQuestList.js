@@ -3,10 +3,13 @@ import { useState } from "react"
 // import { faExclamation } from "@fortawesome/free-solid-svg-icons"
 import Objectives from '../Objectives'
 
-export const MainQuestList = ({ mainQuestList, setQuestList, mainTaskCompleted, mainTaskEdited, objective, setObjective, objectiveList, setObjectiveList, handleSubmitObjective, edit, setEdit }) => {
-    const [showInfo, setShowInfo] = useState(true)
-    const [showObj, setShowObj] = useState(false)
-    const [idShow, setIdShow] = useState('')
+export const MainQuestList = ({ mainQuestList, setQuestList, mainTaskCompleted, mainTaskEdited, objective, setObjective, objectiveList, setObjectiveList, handleSubmitObjective, edit, setEdit, showInfo, setShowInfo, showObj,
+    setShowObj,
+    idShow,
+    setIdShow,
+    Mobile
+}) => {
+
     // console.log('this is new branch')
     return (
         <div className="mainQuestList">
@@ -30,7 +33,7 @@ export const MainQuestList = ({ mainQuestList, setQuestList, mainTaskCompleted, 
                                     {/* <FontAwesomeIcon className="icon" icon={faExclamation}/> */}
                                     <p className={mainTask.completed ? 'completed' : null}>{mainTask.name}</p>
                                 </div>
-                                {showObj &&
+                                {showObj && Mobile &&
                                     <Objectives
                                         objective={objective} setObjective={setObjective}
                                         objectiveList={objectiveList} setObjectiveList={setObjectiveList}

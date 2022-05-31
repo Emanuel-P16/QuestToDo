@@ -11,8 +11,7 @@ const FormTask = ({handleSubmit,questTask,setQuestTask}) => {
              <option value="M">MainQuest</option>
              <option value="S">SideQuest</option>
            </select>
-  
-         </form>
+        </form>
       </div>
     )
 }
