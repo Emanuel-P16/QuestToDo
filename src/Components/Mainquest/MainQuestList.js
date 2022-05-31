@@ -14,7 +14,7 @@ export const MainQuestList = ({ mainQuestList, setQuestList, mainTaskCompleted, 
     // console.log('this is new branch')
     return (
         <QuestLayout>
-            <QuestButtonExpandLayout  onClick={() => setShowInfo(!showInfo)}>
+            <QuestButtonExpandLayout onClick={() => setShowInfo(!showInfo)}>
                 <h3>Main Quests {showInfo ? "-" : "+"}</h3>
             </QuestButtonExpandLayout>
             {showInfo && mainQuestList.map((mainTask, index) => {
