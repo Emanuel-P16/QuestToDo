@@ -17,11 +17,14 @@ export const LayoutSectionStyle = styled.section`
 `
 
 export const LayoutGridStyle = styled.div`
-   /* display: grid;
-   grid-template-columns: 1fr;   */
+  
   justify-content:center;
     align-items:center;
     width:100%;
+    @media only screen and (min-width: 1200px) {
+       display: grid;
+      grid-template-columns: 1fr 1fr;   
+    }
 `;
 
 export const LayoutQuestContainer = styled.section`
