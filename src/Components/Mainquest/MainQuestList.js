@@ -2,7 +2,7 @@ import { useState } from "react"
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 // import { faExclamation } from "@fortawesome/free-solid-svg-icons"
 import Objectives from '../Objectives'
-import { QuestButtonExpandLayout, Questcontainer, QuestLayout } from "./styled-components/mainquest.styled.components"
+import { LayoutObjectiveQuestStyle, QuestButtonExpandLayout, Questcontainer, QuestLayout } from "./styled-components/mainquest.styled.components"
 
 export const MainQuestList = ({ mainQuestList, setQuestList, mainTaskCompleted, mainTaskEdited, objective, setObjective, objectiveList, setObjectiveList, handleSubmitObjective, edit, setEdit, showInfo, setShowInfo, showObj,
     setShowObj,
@@ -34,7 +34,8 @@ export const MainQuestList = ({ mainQuestList, setQuestList, mainTaskCompleted, 
                                     {/* <FontAwesomeIcon className="icon" icon={faExclamation}/> */}
                                     <p className={mainTask.completed ? 'completed' : null}>{mainTask.name}</p>
                                 </div>
-                                {showObj && Mobile &&
+                                {showObj && !Mobile &&
+                                    <LayoutObjectiveQuestStyle>
                                     <Objectives
                                         objective={objective} setObjective={setObjective}
                                         objectiveList={objectiveList} setObjectiveList={setObjectiveList}
@@ -45,7 +46,7 @@ export const MainQuestList = ({ mainQuestList, setQuestList, mainTaskCompleted, 
                                         setQuestList={setQuestList}
                                         edit={edit}
                                         setEdit={setEdit}
-                                    />}
+                                    /></LayoutObjectiveQuestStyle>}
                                 <div className="buttonQuests">
                                     <button type='submit' onClick={() => mainTaskEdited(mainTask._id)}>Edit</button>
                                     <button type='submit' onClick={() => mainTaskCompleted(mainTask._id)}>Completed</button>

@@ -5,7 +5,7 @@ import DailyQuest from '../../Components/DailyQuestComponents/DailyQuest'
 // import DailyData from './dailyQuestsData'
 import FormTask from "../../Components/FormTask";
 import CompletedTasks from "../../Components/CompletedTasks"
-import { LayoutMainStyle, LayoutSectionStyle, LayoutGridStyle, LayoutQuestContainer } from "../../styled-components/layout.styled.component";
+import { LayoutMainStyle, LayoutSectionStyle, LayoutGridStyle, LayoutQuestContainer, LayoutObjectiveStandAloneStyle, LayoutObjectiveContainerStyle } from "../../styled-components/layout.styled.component";
 // import {GoogleLogin} from 'react-google-login'
 // import { GoogleLogin } from '@react-oauth/google';
 // import jwt_decode from 'jwt-decode'
@@ -193,7 +193,7 @@ const Lifequest = () => {
 
     var isMobiles = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     if (isMobiles) {
-      setMobiles(true)
+      setMobiles(false)
       return true
     }
     setMobiles(false)
@@ -253,7 +253,7 @@ const Lifequest = () => {
               questList.map((mainTask, index) => {
                 if (mainTask.type === "M") {
                   return (
-                    <div tabIndex="1" key={index} className="questbutton" onClick={() => {
+                    <LayoutObjectiveStandAloneStyle tabIndex="1" key={index} className="questbutton" onClick={() => {
                       if (idShow === mainTask._id) {
                         setShowObj(true)
                         setIdShow(mainTask._id)
@@ -262,7 +262,7 @@ const Lifequest = () => {
                         setShowObj(true)
                       }
                     }}>
-                      <article className="quest">
+                      <LayoutObjectiveContainerStyle className="quest">
                         {/* <div className="titleQuests">
                           <p className={mainTask.completed ? 'completed' : null}>{mainTask.name}</p>
                       </div> */}
@@ -279,8 +279,8 @@ const Lifequest = () => {
                             setEdit={setEdit}
                           />}
 
-                      </article>
-                    </div>
+                      </LayoutObjectiveContainerStyle>
+                    </LayoutObjectiveStandAloneStyle>
                   )
                 } return null
               })}

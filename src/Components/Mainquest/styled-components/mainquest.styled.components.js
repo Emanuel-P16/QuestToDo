@@ -31,4 +31,11 @@ margin-bottom: 0.5rem;
     background: rgb(2,0,36);
     background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(70,57,14,0.7651260333234856) 0%, rgba(106,99,75,0.6698879380853904) 0%, rgba(233,233,233,0) 24%);
 }  
+`;  
+
+export const LayoutObjectiveQuestStyle = styled.div`
+display:block;
+    @media only screen and (min-width: 1200px){
+    display:none;
+    }
 `;

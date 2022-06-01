@@ -39,3 +39,14 @@ export const LayoutQuestContainer = styled.section`
     border: none;
   }
   `
+
+export const LayoutObjectiveStandAloneStyle = styled.div`
+    display:none;
+    @media only screen and (min-width: 1200px){
+    display:block;
+    }
+  `;
+
+export const LayoutObjectiveContainerStyle = styled.article`
+ 
+  `;
