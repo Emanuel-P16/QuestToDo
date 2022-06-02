@@ -271,6 +271,7 @@ const Lifequest = () => {
                             objective={objective} setObjective={setObjective}
                             objectiveList={objectiveList} setObjectiveList={setObjectiveList}
                             handleSubmitObjective={handleSubmitObjective}
+                            // no se usan mas , para borrar luego 
                             mainTask={mainTask._id}
                             idShow={idShow} setIdShow={setIdShow}
                             mainQuestList={questList}
