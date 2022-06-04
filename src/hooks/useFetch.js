@@ -15,23 +15,13 @@ const useFetch = (url, user) => {
           if (x.google_id === user.google_id) {
             return x
           } 
-          // else return { name: '', type:'', user_id: '' , google_id: '', completed: true, objectives: [{
-          //   "name": "",
-          //   "completed": true
-          // }]}
+        
           return undefined
         })
 
         if(userQuest){
               userQuest = userQuest.filter(quest => quest !== undefined)
-          // if(userQuest === null ) {
-            
-          //    userQuest = [{ name: '', type:'', user_id: '' , google_id: '', completed: true, objectives: [{
-          //     "name": "",
-          //     "completed": true
-          //   }]}]
-          // }
-        
+       
           setState({
             loading: false,
             error: null,

@@ -1,23 +1,21 @@
-import { useState } from "react"
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-// import { faExclamation } from "@fortawesome/free-solid-svg-icons"
+import { useContext, useState } from 'react'
+import { QuestContext } from '../../context/QuestContext'
 import Objectives from '../Objectives'
 import { LayoutObjectiveQuestStyle, QuestButtonExpandLayout, Questcontainer, QuestLayout } from "./styled-components/mainquest.styled.components"
 
-export const MainQuestList = ({ mainQuestList, setQuestList, mainTaskCompleted, mainTaskEdited, objective, setObjective, objectiveList, setObjectiveList, handleSubmitObjective, edit, setEdit, showInfo, setShowInfo, showObj,
+export const MainQuestList = ({  mainTaskEdited, objective, setObjective, objectiveList, setObjectiveList, handleSubmitObjective, edit, setEdit, showObj,
     setShowObj,
     idShow,
-    setIdShow,
-    Mobile
+    setIdShow
 }) => {
-    // </QuestLayout>
-    // console.log('this is new branch')
+    const [showInfo,setShowInfo] = useState(true)
+    const {questList,taskCompleted} = useContext(QuestContext)
     return (
         <QuestLayout>
             <QuestButtonExpandLayout onClick={() => setShowInfo(!showInfo)}>
                 <h3>Main Quests {showInfo ? "-" : "+"}</h3>
             </QuestButtonExpandLayout>
-            {showInfo && mainQuestList.map((mainTask, index) => {
+            {showInfo && questList.map((mainTask, index) => {
                 if (mainTask.type === "M") {
                     return (
                         <Questcontainer tabIndex="1" key={index} onClick={() => {
@@ -34,7 +32,7 @@ export const MainQuestList = ({ mainQuestList, setQuestList, mainTaskCompleted, 
                                     {/* <FontAwesomeIcon className="icon" icon={faExclamation}/> */}
                                     <p className={mainTask.completed ? 'completed' : null}>{mainTask.name}</p>
                                 </div>
-                                {showObj && !Mobile &&
+                                {showObj &&
                                     <LayoutObjectiveQuestStyle>
                                     <Objectives
                                         objective={objective} setObjective={setObjective}
@@ -42,14 +40,12 @@ export const MainQuestList = ({ mainQuestList, setQuestList, mainTaskCompleted, 
                                         handleSubmitObjective={handleSubmitObjective}
                                         mainTask={mainTask._id}
                                         idShow={idShow} setIdShow={setIdShow}
-                                        mainQuestList={mainQuestList}
-                                        setQuestList={setQuestList}
                                         edit={edit}
                                         setEdit={setEdit}
                                     /></LayoutObjectiveQuestStyle>}
                                 <div className="buttonQuests">
                                     <button type='submit' onClick={() => mainTaskEdited(mainTask._id)}>Edit</button>
-                                    <button type='submit' onClick={() => mainTaskCompleted(mainTask._id)}>Completed</button>
+                                    <button type='submit' onClick={() => taskCompleted(mainTask._id)}>Completed</button>
                                 </div>
                             </article>
                         </Questcontainer>

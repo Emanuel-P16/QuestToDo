@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, { useContext, useEffect } from "react"
 import { useLocation } from "react-router-dom"
 import { NavbarStyle, NavbarButtonStyle, NavBarSeparatorStyle,NavBarUserDivStyle,NavBarUserImgStyle} from "../../styled-components";
 import jwt_decode from 'jwt-decode'
@@ -28,7 +28,7 @@ const Navbar = () => {
 
     useEffect(() => {
         setUser(JSON.parse(localStorage.getItem('profile')))
-    }, [location])
+    }, [location,setUser])
 
 
     

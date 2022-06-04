@@ -1,9 +1,9 @@
+import { useContext } from "react"
+import { QuestContext } from "../context/QuestContext"
 
 
-const ObjectiveList = ({objectiveList,setObjectiveList,mainTask,mainQuestList,setQuestList}) => {
+const ObjectiveList = ({mainTask}) => {
     const completedObj = (x,obj) => {
-        
-       
         obj.completed = (!obj.completed)
         fetch(`https://questtodoapi.herokuapp.com/api/quests/${x._id}`,{
             method: 'PUT',
@@ -15,18 +15,17 @@ const ObjectiveList = ({objectiveList,setObjectiveList,mainTask,mainQuestList,se
         })
         .then(res=> res.json())
         
-        mainQuestList.map((object)=>{
+        questList.map((object)=>{
             if(object._id === x._id){
-                setQuestList([...mainQuestList])
+                setQuestList([...questList])
                     
             }return null
         })
       
     } 
-   
+    const {questList,setQuestList} = useContext(QuestContext)
         return (
-            
-            mainQuestList.map((x)=>{
+            questList.map((x)=>{
                 if(mainTask === x._id){
                     return (x.objectives.map((obj,index) =>{
                         return(

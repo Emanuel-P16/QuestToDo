@@ -1,12 +1,15 @@
-import { useState } from "react"
-const SideQuestList = ({sideQuestList, sideTaskCompleted, sideTaskEdited}) => {
+import { useContext, useState } from "react"
+import { QuestContext } from "../context/QuestContext"
+const SideQuestList = ({  sideTaskEdited}) => {
     const [showInfo,setShowInfo] = useState(true)
+    const {questList,taskCompleted} = useContext(QuestContext)
+
     return (
         <div className="mainQuestList">
             <button className="showInfo" onClick={() => setShowInfo(!showInfo)}>
                 <h3>Side Quests {showInfo ? "-" : "+"}</h3>
             </button>
-           {showInfo && sideQuestList.map((sideQuestTask) => {
+           {showInfo && questList.map((sideQuestTask) => {
                if (sideQuestTask.type === 'S') {
 
                
@@ -18,7 +21,7 @@ const SideQuestList = ({sideQuestList, sideTaskCompleted, sideTaskEdited}) => {
                             </div>
                             <div>
                              <button type='submit' onClick={() => sideTaskEdited(sideQuestTask._id)}>Edit</button>
-                             <button type='submit' onClick={() => sideTaskCompleted(sideQuestTask._id)}>Completed</button>
+                             <button type='submit' onClick={() => taskCompleted(sideQuestTask._id)}>Completed</button>
                             </div>
                         </article>
                     </div>
@@ -28,4 +31,4 @@ const SideQuestList = ({sideQuestList, sideTaskCompleted, sideTaskEdited}) => {
     )
 }
 
-export default SideQuestList
+export default SideQuestList    
