@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { useLocation } from "react-router-dom"
 import { NavbarStyle, NavbarButtonStyle, NavBarSeparatorStyle,NavBarUserDivStyle,NavBarUserImgStyle} from "../../styled-components";
 import jwt_decode from 'jwt-decode'
 import { GoogleLogin } from '@react-oauth/google';
+import { QuestContext } from "../../context/QuestContext";
 
 
 const Navbar = () => {
-
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')))
+    const {user,setUser} = useContext(QuestContext)
+    // const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')))
     const location = useLocation()
     const googleSuccess = async (res) => {
         const result = jwt_decode(res.credential)

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import MainQuestList from "../../Components/Mainquest/MainQuestList"
 import SideQuestList from "../../Components/SideQuestList";
 import DailyQuest from '../../Components/DailyQuestComponents/DailyQuest'
@@ -19,6 +19,7 @@ import useFetch from "../../hooks/useFetch";
 // const getLocalStorageCompleted = () => {
 import { ObjectID } from 'bson';
 import Objectives from "../../Components/Objectives";
+import { QuestContext } from "../../context/QuestContext";
 //   let completedList = localStorage.getItem('CompletedList')
 //   if (completedList) {
 //     return (completedList = JSON.parse(localStorage.getItem('CompletedList')))
@@ -40,13 +41,13 @@ const Lifequest = () => {
   const [questTask, setQuestTask] = useState('');
   const [questList, setQuestList] = useState([])//getLocalStorage())
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')))
-  const state = useFetch(`${url}`, user)//getLocalStorage())
+  // const state = useFetch(`${url}`, user)//getLocalStorage())
 
   const [isEditing, setIsEditing] = useState(false)
   const [editId, setEditId] = useState(null)
   // Objective hooks
   const [objective, setObjective] = useState('')
-  const [objectiveList, setObjectiveList] = useState(getLocalStorageObjective())
+  const [objectiveList, setObjectiveList] = useState('')//useState(getLocalStorageObjective())
   const [edit, setEdit] = useState('')
   // useAuth0
   // const {isAuthenticated} = useAuth0()
@@ -57,7 +58,8 @@ const Lifequest = () => {
   const [showObj, setShowObj] = useState(false)
   const [idShow, setIdShow] = useState('')
   const [Mobile, setMobiles] = useState(false)
-
+  const {state} = useContext(QuestContext)
+  // console.log(questcontext)
 
   useEffect(() => {
     // getDatabaseList()
