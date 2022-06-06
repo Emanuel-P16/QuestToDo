@@ -1,7 +1,11 @@
+import { useContext } from "react"
+import { ObjectiveContext } from "../context/ObjectiveContext"
+import { GlobalButtonStyle } from "../styled-components/layout.styled.component"
 
 
-const FormObjective = ({objective,setObjective,objectiveList,setObjectiveList,handleSubmitObjective,mainTask,edit,setEdit}) => {
-  
+const FormObjective = ({handleSubmitObjective,mainTask,setEdit}) => {
+    const { objective, setObjective} = useContext(ObjectiveContext)
+
     return (
      
         <div>
@@ -13,7 +17,7 @@ const FormObjective = ({objective,setObjective,objectiveList,setObjectiveList,ha
                     setEdit(mainTask)}}
                 />
                 
-                <button type="submit">Send Objective</button>
+                <GlobalButtonStyle type="submit">Send Objective</GlobalButtonStyle>
             </form>
         </div>
     )

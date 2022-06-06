@@ -1,20 +1,18 @@
 import { useContext } from 'react'
+import { ObjectiveContext } from '../context/ObjectiveContext'
 import { QuestContext } from '../context/QuestContext'
 import FormObjective from './FormObjective'
 import ObjectiveList from './ObjectiveList'
 
-const Objectives = ({objective,setObjective,objectiveList,setObjectiveList,handleSubmitObjective,mainTask,edit,setEdit,idShow,setIdShow}) => {
-    const {questList,setQuestList} = useContext(QuestContext)
-    console.log(questList)
+const Objectives = ({handleSubmitObjective,mainTask,setEdit,idShow}) => {
+    const { objective, setObjective} = useContext(ObjectiveContext)
     if (idShow === mainTask){
         return (
             <div>        
                 <FormObjective 
                  objective={objective} setObjective={setObjective}
-                 objectiveList={objectiveList} setObjectiveList={setObjectiveList}
                  handleSubmitObjective={handleSubmitObjective}
                  mainTask={mainTask}
-                 edit={edit}
                  setEdit={setEdit}
                  />
                 <ObjectiveList 

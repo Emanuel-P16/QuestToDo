@@ -41,4 +41,6 @@ border-radius: 0;
 width: 4rem;
 height: 100%;
 border-radius: .25rem;
+background-color: var(--clr-pallete-3);
+
 `;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import MainQuestList from "../../Components/Mainquest/MainQuestList"
 import SideQuestList from "../../Components/SideQuestList";
 // import DailyQuest from '../../Components/DailyQuestComponents/DailyQuest'
@@ -6,64 +6,21 @@ import SideQuestList from "../../Components/SideQuestList";
 import FormTask from "../../Components/FormTask";
 import CompletedTasks from "../../Components/CompletedTasks"
 import { LayoutMainStyle, LayoutSectionStyle, LayoutGridStyle, LayoutQuestContainer, LayoutObjectiveStandAloneStyle, LayoutObjectiveContainerStyle } from "../../styled-components/layout.styled.component";
-// import {GoogleLogin} from 'react-google-login'
-// import { GoogleLogin } from '@react-oauth/google';
-// import jwt_decode from 'jwt-decode'
-// import {useNavigate} from 'react-router-dom'
-// import { LoginButton } from "../../Components/Login/Login";
-// import Profile from "../../Components/Login/Profile";
-// import { LogoutButton } from "../../Components/Login/LogOut";
-// import { useAuth0 } from "@auth0/auth0-react";
-// import Pomodoro from "../../Components/Pomodoro/Pomodoro";
-// const getLocalStorageCompleted = () => {
 import { ObjectID } from 'bson';
 import Objectives from "../../Components/Objectives";
 import { QuestContext } from "../../context/QuestContext";
-//   let completedList = localStorage.getItem('CompletedList')
-//   if (completedList) {
-//     return (completedList = JSON.parse(localStorage.getItem('CompletedList')))
-//   } else {
-//     return []
-//   }
-// }
-// const getLocalStorageObjective = () => {
-//   let objectiveList = localStorage.getItem('ObjectiveList')
-//   if (objectiveList) {
-//     return (objectiveList = JSON.parse(localStorage.getItem('ObjectiveList')))
-//   } else {
-//     return []
-//   }
-// }
+import { ObjectiveContext} from "../../context/ObjectiveContext";
 
 const Lifequest = () => {
-  // const [url] = useState('https://questtodoapi.herokuapp.com/api/quests')
   const [questTask, setQuestTask] = useState('');
-  // const [questList, setQuestList] = useState([])//getLocalStorage())
-  // const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')))
-  // const state = useFetch(`${url}`, user)//getLocalStorage())
   const [isEditing, setIsEditing] = useState(false)
   const [editId, setEditId] = useState(null)
-  // Objective hooks
-  const [objective, setObjective] = useState('')
-  const [objectiveList, setObjectiveList] = useState('')//useState(getLocalStorageObjective())
   const [edit, setEdit] = useState('')
-  //// mainquest useSTATES
   const [showObj, setShowObj] = useState(false)
   const [idShow, setIdShow] = useState('')
-  // const [Mobile, setMobiles] = useState(false)
   const {url,user,questList,setQuestList} = useContext(QuestContext)
-  // console.log(questcontext)
+  const {objective,setObjective,objectiveList,setObjectiveList} = useContext(ObjectiveContext)
 
-  // useEffect(() => {
-  //   // getDatabaseList()
-  //   if (state.data) { setQuestList(state.data) } else { setQuestList([]) }
-  //   // isMobile()
-  // }, [state.data,setQuestList])
-
-  // useEffect(() => {
-  //   setUser(user)
-
-  // }, [user])
 
 
   const TaskEdited = (id) => {
@@ -78,7 +35,6 @@ const Lifequest = () => {
 
   
   const handleSubmit = async (e) => {
-
     e.preventDefault()
     if (!questTask) {
     } else if (questTask && isEditing) {
@@ -93,7 +49,6 @@ const Lifequest = () => {
                 'Content-type': 'application/json'
               },
               body: JSON.stringify(item)
-
             })
               .then(res => res.json())
             return { ...item, name: questTask }
@@ -117,7 +72,6 @@ const Lifequest = () => {
           "completed": false
         }]
       }
-
       await fetch(url, {
         method: 'POST',
         mode: 'cors',
@@ -126,45 +80,30 @@ const Lifequest = () => {
           'Content-type': 'application/json'
         },
         body: JSON.stringify(newItem)
-
       })
         .then(res => res.json())
       setQuestList([...questList, newItem])
       setQuestTask('')
       console.log(questList)
-
     }
   }
 
   const handleSubmitObjective = (e) => {
     e.preventDefault()
-
     questList.map((item) => {
       if (item._id === edit) {
-
         item.objectives = [...item.objectives, {
           "name": objective,
           "completed": false
         }]
         fetch(`${url}/${item._id}`, {
-          method: 'PUT',
-          headers: {
-            'Accept': 'application/json',
-            'Content-type': 'application/json'
-          },
+          method: 'PUT',headers: {'Accept': 'application/json','Content-type': 'application/json'},
           body: JSON.stringify(item)
-
         })
           .then(res => res.json())
-        // setQuestList(questList)
       } return null
     })
-    const newObjective = {
-       id: new Date().getTime().toString(), 
-       title: objective, 
-       type: objective, 
-       idd: edit, 
-       completed: false }
+    const newObjective = {id: new Date().getTime().toString(), title: objective, type: objective, idd: edit, completed: false }
     setObjectiveList([...objectiveList, newObjective])
     setObjective('')
   }
@@ -183,8 +122,6 @@ const Lifequest = () => {
         <LayoutQuestContainer>
           <MainQuestList
             mainTaskEdited={TaskEdited}
-            objective={objective} setObjective={setObjective}
-            objectiveList={objectiveList} setObjectiveList={setObjectiveList}
             handleSubmitObjective={handleSubmitObjective}
             edit={edit}
             setEdit={setEdit}
@@ -193,10 +130,6 @@ const Lifequest = () => {
             idShow={idShow}
             setIdShow={setIdShow}
           />
-          {/* const [showInfo, setShowInfo] = useState(true)
-  const [showObj, setShowObj] = useState(false)
-  const [idShow, setIdShow] = useState('') */}
-
           <SideQuestList
             sideTaskEdited={TaskEdited}
           />
@@ -206,7 +139,6 @@ const Lifequest = () => {
           /> */}
           <CompletedTasks
             completedTasks={questList}
-          //  setCompletedTasks={}
           />
         </LayoutQuestContainer>
         {showObj  &&
@@ -230,32 +162,17 @@ const Lifequest = () => {
                       </div> */}
                         {showObj &&
                           <Objectives
-                            objective={objective} setObjective={setObjective}
-                            objectiveList={objectiveList} setObjectiveList={setObjectiveList}
                             handleSubmitObjective={handleSubmitObjective}
-                            // no se usan mas , para borrar luego 
                             mainTask={mainTask._id}
                             idShow={idShow} setIdShow={setIdShow}
                             edit={edit}
                             setEdit={setEdit}
                           />}
-
                       </LayoutObjectiveContainerStyle>
                     </LayoutObjectiveStandAloneStyle>
                   )
                 } return null
               })}
-            {/* // <Objectives
-                                    //     objective={objective} setObjective={setObjective}
-                                    //     objectiveList={objectiveList} setObjectiveList={setObjectiveList}
-                                    //     handleSubmitObjective={handleSubmitObjective}
-                                    //     mainTask={mainTask._id}
-                                    //     idShow={idShow} setIdShow={setIdShow}
-                                    //     mainQuestList={questList}
-                                    //     setQuestList={setQuestList}
-                                    //     edit={edit}
-                                    //     setEdit={setEdit}
-                                    // />} */}
           </LayoutQuestContainer>}
       </LayoutGridStyle>
     </LayoutMainStyle>

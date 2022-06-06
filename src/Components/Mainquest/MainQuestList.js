@@ -1,9 +1,14 @@
 import { useContext, useState } from 'react'
 import { QuestContext } from '../../context/QuestContext'
+import { GlobalButtonStyle } from '../../styled-components/layout.styled.component'
 import Objectives from '../Objectives'
-import { LayoutObjectiveQuestStyle, QuestButtonExpandLayout, Questcontainer, QuestLayout } from "./styled-components/mainquest.styled.components"
+import { LayoutObjectiveQuestStyle, QuestButtonExpandLayout, Questcontainer, QuestLayout,Questarticle,ButtonQuests } from "./styled-components/mainquest.styled.components"
 
-export const MainQuestList = ({  mainTaskEdited, objective, setObjective, objectiveList, setObjectiveList, handleSubmitObjective, edit, setEdit, showObj,
+export const MainQuestList = ({  
+    mainTaskEdited, 
+    handleSubmitObjective,  
+    setEdit, 
+    showObj,
     setShowObj,
     idShow,
     setIdShow
@@ -27,27 +32,23 @@ export const MainQuestList = ({  mainTaskEdited, objective, setObjective, object
                                 setShowObj(true)
                             }
                         }}>
-                            <article className="quest">
-                                <div className="titleQuests">
+                            <Questarticle>                         
                                     {/* <FontAwesomeIcon className="icon" icon={faExclamation}/> */}
                                     <p className={mainTask.completed ? 'completed' : null}>{mainTask.name}</p>
-                                </div>
                                 {showObj &&
                                     <LayoutObjectiveQuestStyle>
                                     <Objectives
-                                        objective={objective} setObjective={setObjective}
-                                        objectiveList={objectiveList} setObjectiveList={setObjectiveList}
                                         handleSubmitObjective={handleSubmitObjective}
                                         mainTask={mainTask._id}
-                                        idShow={idShow} setIdShow={setIdShow}
-                                        edit={edit}
+                                        idShow={idShow}
                                         setEdit={setEdit}
-                                    /></LayoutObjectiveQuestStyle>}
-                                <div className="buttonQuests">
-                                    <button type='submit' onClick={() => mainTaskEdited(mainTask._id)}>Edit</button>
-                                    <button type='submit' onClick={() => taskCompleted(mainTask._id)}>Completed</button>
-                                </div>
-                            </article>
+                                    />
+                                    </LayoutObjectiveQuestStyle>}
+                                <ButtonQuests>
+                                    <GlobalButtonStyle type='submit' onClick={() => mainTaskEdited(mainTask._id)}>Edit</GlobalButtonStyle>
+                                    <GlobalButtonStyle type='submit' onClick={() => taskCompleted(mainTask._id)}>Completed</GlobalButtonStyle>
+                                </ButtonQuests>
+                            </Questarticle>
                         </Questcontainer>
                     )
                 } else { return null }

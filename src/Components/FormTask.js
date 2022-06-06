@@ -1,3 +1,5 @@
+import { GlobalButtonStyle, GlobalSelectStyle } from "../styled-components/layout.styled.component"
+
 const FormTask = ({handleSubmit,questTask,setQuestTask}) => {
     return ( 
       <div className="formContainer">
@@ -6,11 +8,11 @@ const FormTask = ({handleSubmit,questTask,setQuestTask}) => {
            value={questTask}
            onChange={(e)=> setQuestTask(e.target.value)}
            />
-           <button type="submit">Send</button>
-           <select  name="type_input" id="type_input">
+           <GlobalButtonStyle type="submit">Send</GlobalButtonStyle>
+           <GlobalSelectStyle  name="type_input" id="type_input">
              <option value="M">MainQuest</option>
              <option value="S">SideQuest</option>
-           </select>
+           </GlobalSelectStyle>
         </form>
       </div>
     )

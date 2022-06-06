@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: rgb(17, 17, 17);
+  background-color: var(--clr-pallete-1)
 
 }
 
@@ -15,6 +15,15 @@ body {
   --clr-grey-2: hsl(45, 52%, 56%);
   /* Text color for quests */
   --clr-white-1: rgb(211, 211, 211);
+  --clr-pallete-1: rgb(34, 40, 49);
+  --clr-pallete-1-rgba: rgba(34, 40, 49,0.5);
+  --clr-pallete-2: rgb(57, 62, 70);
+  --clr-pallete-2-rgba: rgba(57, 62, 70,0.6);
+  --clr-pallete-3: rgb(250, 243, 243);
+  --clr-pallete-3-rgba: rgba(250, 243, 243,0.1);
+  --clr-pallete-4: rgb(184, 225, 221);
+  /* --clr-pallete-3: rgb(0, 173, 181);
+  --clr-pallete-4: rgb(0, 255, 245); */
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -25,10 +34,10 @@ main{
   flex-direction: column;
 
 }
-h3{
+/* h3{
   color: var(--clr-grey-1);
   
-}
+} */
 p{
  color: var( --clr-white-1);
  margin: 0;
@@ -119,15 +128,15 @@ p{
   color: gray;
   text-decoration: line-through;
 }
-.titleQuests{
+/* .titleQuests{
   display: flex;
   word-break: break-all;
   
-}
-.titleQuests p{
+} */
+/* .titleQuests p{
   color: white;
   margin-left: 1rem;
-}
+} */
 
 .icon{
   color: var(--clr-grey-2);

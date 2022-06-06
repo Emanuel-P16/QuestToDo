@@ -2,13 +2,15 @@ import styled from 'styled-components'
 
 
 export const LayoutMainStyle = styled.main`
-   
     display:flex;
     flex-direction:column;
-    width: 100%;
+    margin: 4rem 2rem;
+    padding: 4rem 0;
+    width: 95%;
     justify-content:center;
     align-items:center;
-
+    border: 3px solid var(--clr-pallete-3);
+    background-color: var(--clr-pallete-3-rgba);
 `
 export const LayoutSectionStyle = styled.section`
   display: flex;
@@ -27,7 +29,7 @@ export const LayoutGridStyle = styled.div`
     grid-template-columns: 1fr 1fr;
     margin-top: 2rem;   
     width: 95%;
-    border: var(--clr-grey-1) solid 1px;
+    /* border: var(--clr-grey-1) solid 1px; */
     }
 `;
 
@@ -50,3 +52,10 @@ export const LayoutObjectiveStandAloneStyle = styled.div`
 export const LayoutObjectiveContainerStyle = styled.article`
  
   `;
+
+export const GlobalButtonStyle = styled.button`
+  background-color: var(--clr-pallete-3);
+`
+export const GlobalSelectStyle = styled.select`
+  background-color: var(--clr-pallete-3);
+`

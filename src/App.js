@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 // import { Lifequest } from './pages/Lifequest';
 import { lazy, Suspense, useEffect, useState } from 'react';
 import { QuestContext } from './context/QuestContext';
+import { ObjectiveContext } from './context/ObjectiveContext';
 import useFetch from './hooks/useFetch';
 // import Navbar from './Components/Navbar/Navbar';
 
@@ -14,24 +15,21 @@ function App() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')))
   const state = useFetch(`https://questtodoapi.herokuapp.com/api/quests`, user)
   const [questList, setQuestList] = useState([])
-
+  const [objective, setObjective] = useState('')
+  const [objectiveList, setObjectiveList] = useState('')//useState(getLocalStorageObjective())
   useEffect(() => {
     if (state.data) { setQuestList(state.data) } else { setQuestList([]) }
-  }, [state.data,setQuestList])
-  
-  
+  }, [state.data, setQuestList])
+
+
   const taskCompleted = async (id) => {
     if (id === undefined) return null
     const item = questList.find((item) => item._id === id)
-
     item.completed = (!item.completed)
     item.type = "C"
     await fetch(`${url}/${item._id}`, {
       method: 'PUT',
-      headers: {
-        'Accept': 'application/json',
-        'Content-type': 'application/json',
-      },
+      headers: {'Accept': 'application/json','Content-type': 'application/json'},
       body: JSON.stringify(item)
     })
       .then(res => res.json())
@@ -47,14 +45,21 @@ function App() {
       setQuestList,
       taskCompleted
     }}>
-      <Suspense fallback={<div>Loading...</div>}>
-        <BrowserRouter>
-          <Navbar/>
-          <Routes>
-            <Route path='/' element={<Lifequest />} />
-          </Routes>
-        </BrowserRouter>
-      </Suspense>
+      <ObjectiveContext.Provider value={{
+        objective,
+        setObjective,
+        objectiveList,
+        setObjectiveList
+      }} >
+        <Suspense fallback={<div>Loading...</div>}>
+          <BrowserRouter>
+            <Navbar />
+            <Routes>
+              <Route path='/' element={<Lifequest />} />
+            </Routes>
+          </BrowserRouter>
+        </Suspense>
+      </ObjectiveContext.Provider>
     </QuestContext.Provider>
   )
 }
