@@ -16,7 +16,7 @@ body {
   /* Text color for quests */
   --clr-white-1: rgb(211, 211, 211);
   --clr-pallete-1: rgb(34, 40, 49);
-  --clr-pallete-1-rgba: rgba(34, 40, 49,0.5);
+  --clr-pallete-1-rgba: rgba(34, 40, 49,0.3);
   --clr-pallete-2: rgb(57, 62, 70);
   --clr-pallete-2-rgba: rgba(57, 62, 70,0.6);
   --clr-pallete-3: rgb(250, 243, 243);

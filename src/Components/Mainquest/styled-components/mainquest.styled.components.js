@@ -32,7 +32,7 @@ background-color: transparent;
 border: none;
 border-radius: 0;
 margin-bottom: 0.5rem;
-border:2px var(--clr-pallete-3) solid; 
+border:2px var(--clr-pallete-3-rgba) solid; 
 background: var(--clr-pallete-1-rgba);
 &:focus{
     border:3px var(--clr-pallete-3) solid; 

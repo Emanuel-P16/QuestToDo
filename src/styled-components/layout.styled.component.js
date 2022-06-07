@@ -46,11 +46,20 @@ export const LayoutObjectiveStandAloneStyle = styled.div`
     display:none;
     @media only screen and (min-width: 1200px){
     display:block;
+    /* justify-content:center; */
+    margin:  auto auto;
+    
+    /* width: 100%;
+    height: 100%; */
     }
   `;
 
 export const LayoutObjectiveContainerStyle = styled.article`
- 
+border: 2px solid var(--clr-pallete-3);
+margin-top: 4rem;
+margin-left: 15rem;
+/* width: 100%;
+height:100%;  */
   `;
 
 export const GlobalButtonStyle = styled.button`

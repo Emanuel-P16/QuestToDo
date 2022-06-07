@@ -143,23 +143,30 @@ const Lifequest = () => {
         </LayoutQuestContainer>
         {showObj  &&
           <LayoutQuestContainer>
-            {showObj  &&
+            {
               questList.map((mainTask, index) => {
                 if (mainTask.type === "M") {
+                  console.log(idShow)
+                      console.log(mainTask._id)
+                      if (idShow !== mainTask._id) return null
                   return (
-                    <LayoutObjectiveStandAloneStyle tabIndex="1" key={index} className="questbutton" onClick={() => {
+                    <LayoutObjectiveStandAloneStyle tabIndex="1" key={index} onClick={() => {
+                      
+                      
                       if (idShow === mainTask._id) {
                         setShowObj(true)
                         setIdShow(mainTask._id)
                       } else {
-                        setIdShow(mainTask._id)
-                        setShowObj(true)
+                        setIdShow(null)
+                        setShowObj(false)
+                    
                       }
                     }}>
-                      <LayoutObjectiveContainerStyle className="quest">
-                        {/* <div className="titleQuests">
+                  
+                      <LayoutObjectiveContainerStyle>
+                        <div className="titleQuests">
                           <p className={mainTask.completed ? 'completed' : null}>{mainTask.name}</p>
-                      </div> */}
+                      </div>
                         {showObj &&
                           <Objectives
                             handleSubmitObjective={handleSubmitObjective}
