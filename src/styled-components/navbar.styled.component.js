@@ -9,6 +9,7 @@ color:white;
 display:flex;
 flex-direction: row;
 justify-content: center;
+border-bottom: 1px solid  var(--clr-pallete-3);
 
 `;
 
@@ -17,7 +18,7 @@ export const NavBarSeparatorStyle = styled.div`
   align-items:center;
   width:100%;
   height: 100%;
-  justify-content: space-between  ;
+  justify-content: space-between;
   margin: 0 1rem;
 `;
 
@@ -42,5 +43,8 @@ width: 4rem;
 height: 100%;
 border-radius: .25rem;
 background-color: var(--clr-pallete-3);
+&:hover{
+    background-color: var(--clr-pallete-4)
+  }
 
 `;

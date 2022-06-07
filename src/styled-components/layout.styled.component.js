@@ -4,7 +4,7 @@ import styled from 'styled-components'
 export const LayoutMainStyle = styled.main`
     display:flex;
     flex-direction:column;
-    margin: 4rem 2rem;
+    margin: 2rem 2rem;
     padding: 4rem 0;
     width: 95%;
     justify-content:center;
@@ -46,8 +46,11 @@ export const LayoutObjectiveStandAloneStyle = styled.div`
     display:none;
     @media only screen and (min-width: 1200px){
     display:block;
-    /* justify-content:center; */
+    width: 100%;
+    height: 100%;
     margin:  auto auto;
+    border: 1px solid var(--clr-pallete-3);
+    background-color: var(--clr-pallete-1-rgba);
     
     /* width: 100%;
     height: 100%; */
@@ -55,16 +58,42 @@ export const LayoutObjectiveStandAloneStyle = styled.div`
   `;
 
 export const LayoutObjectiveContainerStyle = styled.article`
-border: 2px solid var(--clr-pallete-3);
+.titleQuests p{
+  text-align: center;
+  font-size: 2rem;
+  border-bottom:2px solid var(--clr-pallete-3);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+/* border: 2px solid var(--clr-pallete-3); */
 margin-top: 4rem;
-margin-left: 15rem;
+margin-left: 5rem;
+margin-right: 5rem;
 /* width: 100%;
 height:100%;  */
   `;
 
+export const FormStyle = styled.form`
+input{
+background-color: var(--clr-pallete-1-rgba);
+border: 2px solid var(--clr-pallete-3-rgba);
+color: var(--clr-pallete-3)
+}
+input:focus{
+outline: none;
+border: 2px solid var(--clr-pallete-3);
+}
+`;
+
 export const GlobalButtonStyle = styled.button`
   background-color: var(--clr-pallete-3);
+ &:hover{
+    background-color: var(--clr-pallete-4)
+  }
 `
 export const GlobalSelectStyle = styled.select`
   background-color: var(--clr-pallete-3);
+  &:hover{
+    background-color: var(--clr-pallete-4)
+  }
 `

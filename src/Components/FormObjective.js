@@ -1,6 +1,6 @@
 import { useContext } from "react"
 import { ObjectiveContext } from "../context/ObjectiveContext"
-import { GlobalButtonStyle } from "../styled-components/layout.styled.component"
+import {  FormStyle,GlobalButtonStyle } from "../styled-components/layout.styled.component"
 
 
 const FormObjective = ({handleSubmitObjective,mainTask,setEdit}) => {
@@ -9,7 +9,7 @@ const FormObjective = ({handleSubmitObjective,mainTask,setEdit}) => {
     return (
      
         <div>
-            <form className="form objectiveForm" action="" onSubmit={handleSubmitObjective}>
+            <FormStyle className="form objectiveForm" action="" onSubmit={handleSubmitObjective}>
                 <input type="text" 
                 placeholder="Objective"
                 value={objective}
@@ -18,7 +18,7 @@ const FormObjective = ({handleSubmitObjective,mainTask,setEdit}) => {
                 />
                 
                 <GlobalButtonStyle type="submit">Send Objective</GlobalButtonStyle>
-            </form>
+            </FormStyle>
         </div>
     )
 }
