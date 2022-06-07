@@ -59,6 +59,7 @@ export const LayoutObjectiveStandAloneStyle = styled.div`
 
 export const LayoutObjectiveContainerStyle = styled.article`
 .titleQuests p{
+  color: var(--clr-pallete-3);
   text-align: center;
   font-size: 2rem;
   border-bottom:2px solid var(--clr-pallete-3);
@@ -73,6 +74,9 @@ margin-right: 5rem;
 height:100%;  */
   `;
 
+export const FormContainer = styled.div`
+margin: 0.5rem auto;
+`;
 export const FormStyle = styled.form`
 input{
 background-color: var(--clr-pallete-1-rgba);
@@ -86,14 +90,26 @@ border: 2px solid var(--clr-pallete-3);
 `;
 
 export const GlobalButtonStyle = styled.button`
+  border-radius:0;
   background-color: var(--clr-pallete-3);
+  border:  var(--clr-pallete-4);
+  height: 1.5rem;
+  font-weight: bold;
+  margin-left: 0.25rem;
  &:hover{
-    background-color: var(--clr-pallete-4)
+    background-color: var(--clr-pallete-4);
+    cursor: pointer;
   }
 `
 export const GlobalSelectStyle = styled.select`
   background-color: var(--clr-pallete-3);
+  border-radius:0;
+  border:  var(--clr-pallete-4);
+  height: 1.5rem;
+  font-weight: bold;
+  margin-left: 0.25rem;
   &:hover{
-    background-color: var(--clr-pallete-4)
+    background-color: var(--clr-pallete-4);
+    cursor: pointer;
   }
 `

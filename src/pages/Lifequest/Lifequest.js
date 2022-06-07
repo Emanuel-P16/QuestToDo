@@ -1,10 +1,10 @@
 import React, { useState, useContext } from "react";
 import MainQuestList from "../../Components/Mainquest/MainQuestList"
-import SideQuestList from "../../Components/SideQuestList";
+import SideQuestList from "../../Components/Mainquest/SideQuestList";
+import  CompletedList  from "../../Components/Mainquest/CompletedList";
 // import DailyQuest from '../../Components/DailyQuestComponents/DailyQuest'
 // import DailyData from './dailyQuestsData'
 import FormTask from "../../Components/FormTask";
-import CompletedTasks from "../../Components/CompletedTasks"
 import { LayoutMainStyle, LayoutSectionStyle, LayoutGridStyle, LayoutQuestContainer, LayoutObjectiveStandAloneStyle, LayoutObjectiveContainerStyle } from "../../styled-components/layout.styled.component";
 import { ObjectID } from 'bson';
 import Objectives from "../../Components/Objectives";
@@ -137,7 +137,10 @@ const Lifequest = () => {
             dailyQuestList={questList} setDailyQuestList={setQuestList}
             dailyTaskCompleted={taskCompleted}
           /> */}
-          <CompletedTasks
+          {/* <CompletedTasks
+            completedTasks={questList}
+          /> */}
+          <CompletedList
             completedTasks={questList}
           />
         </LayoutQuestContainer>

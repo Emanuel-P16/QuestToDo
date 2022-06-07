@@ -1,8 +1,8 @@
-import { FormStyle,GlobalButtonStyle, GlobalSelectStyle } from "../styled-components/layout.styled.component"
+import { FormContainer, FormStyle,GlobalButtonStyle, GlobalSelectStyle } from "../styled-components/layout.styled.component"
 
 const FormTask = ({ handleSubmit, questTask, setQuestTask }) => {
   return (
-    <div className="formContainer">
+    <FormContainer>
       <FormStyle action="" onSubmit={handleSubmit}>
         <input type="text"
           value={questTask}
@@ -14,7 +14,7 @@ const FormTask = ({ handleSubmit, questTask, setQuestTask }) => {
           <option value="S">SideQuest</option>
         </GlobalSelectStyle>
       </FormStyle>
-    </div>
+    </FormContainer>
   )
 }
 
