@@ -5,7 +5,12 @@ import  CompletedList  from "../../Components/Mainquest/CompletedList";
 // import DailyQuest from '../../Components/DailyQuestComponents/DailyQuest'
 // import DailyData from './dailyQuestsData'
 import FormTask from "../../Components/FormTask";
-import { LayoutMainStyle, LayoutSectionStyle, LayoutGridStyle, LayoutQuestContainer, LayoutObjectiveStandAloneStyle, LayoutObjectiveContainerStyle } from "../../styled-components/layout.styled.component";
+import { LayoutMainStyle,
+          LayoutSectionStyle,
+          LayoutGridStyle,
+          LayoutQuestContainer, 
+          LayoutObjectiveStandAloneStyle, 
+          LayoutObjectiveContainerStyle } from "../../styled-components/layout.styled.component";
 import { ObjectID } from 'bson';
 import Objectives from "../../Components/Objectives";
 import { QuestContext } from "../../context/QuestContext";
@@ -149,8 +154,6 @@ const Lifequest = () => {
             {
               questList.map((mainTask, index) => {
                 if (mainTask.type === "M") {
-                  console.log(idShow)
-                      console.log(mainTask._id)
                       if (idShow !== mainTask._id) return null
                   return (
                     <LayoutObjectiveStandAloneStyle tabIndex="1" key={index} onClick={() => {
