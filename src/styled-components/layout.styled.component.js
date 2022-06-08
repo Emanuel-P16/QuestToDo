@@ -81,7 +81,8 @@ export const FormStyle = styled.form`
 input{
 background-color: var(--clr-pallete-1-rgba);
 border: 2px solid var(--clr-pallete-3-rgba);
-color: var(--clr-pallete-3)
+color: var(--clr-pallete-3);
+margin-left: 3rem;
 }
 input:focus{
 outline: none;
