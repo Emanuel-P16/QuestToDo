@@ -4,13 +4,17 @@ import styled from 'styled-components'
 export const LayoutMainStyle = styled.main`
     display:flex;
     flex-direction:column;
-    margin: 2rem 2rem;
+    margin-left: 0.4rem;
     padding: 4rem 0;
     width: 95%;
     justify-content:center;
     align-items:center;
     border: 3px solid var(--clr-pallete-3);
     background-color: var(--clr-pallete-3-rgba);
+    @media only screen and (min-width: 1200px) {
+      margin: 2rem 2rem;
+    /* border: var(--clr-grey-1) solid 1px; */
+    }
 `
 export const LayoutSectionStyle = styled.section`
   display: flex;
@@ -36,7 +40,7 @@ export const LayoutGridStyle = styled.div`
 export const LayoutQuestContainer = styled.section`
   margin: 0rem 2rem;
   height: 100%;
-  border: var(--clr-grey-1) solid 1px;
+  /* border: var(--clr-grey-1) solid 1px; */
   @media only screen and (min-width: 1200px ){
     border: none;
   }
@@ -82,7 +86,7 @@ input{
 background-color: var(--clr-pallete-1-rgba);
 border: 2px solid var(--clr-pallete-3-rgba);
 color: var(--clr-pallete-3);
-margin-left: 3rem;
+/* margin-left: 1rem; */
 }
 input:focus{
 outline: none;
