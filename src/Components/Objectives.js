@@ -4,24 +4,24 @@ import { ObjectiveContext } from '../context/ObjectiveContext'
 import FormObjective from './FormObjective'
 import ObjectiveList from './ObjectiveList'
 
-const Objectives = ({handleSubmitObjective,mainTask,setEdit,idShow}) => {
-    const { objective, setObjective} = useContext(ObjectiveContext)
-    if (idShow === mainTask){
+const Objectives = ({ handleSubmitObjective, mainTask, setEdit, idShow }) => {
+    const { objective, setObjective } = useContext(ObjectiveContext)
+    if (idShow === mainTask) {
         return (
-            <div>        
-                <FormObjective 
-                 objective={objective} setObjective={setObjective}
-                 handleSubmitObjective={handleSubmitObjective}
-                 mainTask={mainTask}
-                 setEdit={setEdit}
-                 />
-                <ObjectiveList 
-                mainTask={mainTask}
+            <div>
+                <FormObjective
+                    objective={objective} setObjective={setObjective}
+                    handleSubmitObjective={handleSubmitObjective}
+                    mainTask={mainTask}
+                    setEdit={setEdit}
+                />
+                <ObjectiveList
+                    mainTask={mainTask}
                 />
             </div>
         )
     } else {
-        return(
+        return (
             null
         )
     }
